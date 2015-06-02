@@ -1,0 +1,71 @@
+#ifndef ENTITY_H
+#define ENTITY_H
+
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include "resourcemanager.h"
+#include "animation.h"
+
+#include "entityconfigurator.h"
+
+const float PI = 3.14159265;
+
+class Entity : public sf::Drawable
+{
+
+public:
+
+    Entity();
+    virtual void update(sf::Time deltaTime);
+
+    virtual void setPosition(sf::Vector2f pos);
+    virtual void setPosition(float vx, float vy);
+
+    virtual void setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun);
+
+    virtual void initDefault();
+
+    virtual void move(sf::Vector2f target);
+
+    virtual void setState(EntityState::stateOfObject st, EntityState::direction dr);
+
+    virtual void setType(EntityState::typeOfEntity enType);
+
+    virtual void setSpeed(int spd);
+
+    virtual sf::Vector2f getPosition() const;
+
+protected:
+
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    {
+        target.draw(mAnimation, states);
+    }
+
+    int mSpeed;
+
+//    sf::Texture entityNormal, entityRun;
+
+    EntityConfigurator initializier;
+
+    sf::Vector2f targetCoordinates;
+
+    float distanceToTarget;
+
+    Animation mAnimation;
+
+    sf::Vector2f mVelocity;
+
+    sf::Vector2f mPosition;
+
+    EntityState::typeOfEntity type;
+
+    EntityState::direction dir;
+
+    EntityState::statsOfEntity stats;
+
+    EntityState::stateOfObject state;
+
+};
+
+#endif // ENTITY_H
