@@ -2,16 +2,15 @@
 
 NetworkOperator::NetworkOperator()
 {
+
+}
+
+void NetworkOperator::bind()
+{
     if (socket.bind(SERVER_PORT) != sf::Socket::Done)
     {
         throw std::runtime_error("Failed to bind");
     }
-
-}
-
-void NetworkOperator::connect()
-{
-
 }
 
 void NetworkOperator::send(sf::Packet packet)

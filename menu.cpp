@@ -10,17 +10,12 @@ Menu::Menu() : mWindow(sf::VideoMode(1366,768), "Arms Race", sf::Style::Fullscre
 
     background.setTexture(textureHolderMenu.get(Textures::MenuBackground));
 
-    login();
-
-    parser = new Parser(this);
-
-    formManager.setParser(parser);
 
 }
 
 void Menu::run()
 {
-    parser->startRecieve();
+    createLoginForm();
 
     sf::Clock mainClock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -41,11 +36,8 @@ void Menu::run()
     }
 }
 
-void Menu::login()
+void Menu::createLoginForm()
 {
-//    std::cout << "EnterLogin" << std::endl;
-////    startNew();
-//    parser->login("morphei","mor123");
     form = formManager.createForm(Forms::LoginForm, sf::Vector2f(1100,50));
 }
 
@@ -64,8 +56,8 @@ void Menu::render()
         mWindow.draw((*itr));
     }
 
-    if(form.exsist())
-    mWindow.draw(form);
+    if(form->exsist())
+    mWindow.draw(*form);
 
     mWindow.display();
 }
@@ -77,8 +69,8 @@ void Menu::update(sf::Time deltaTime)
             (*itr).update();
     }
 
-    if(form.exsist())
-    form.update(deltaTime);
+    if(form->exsist())
+    form->update(deltaTime);
 }
 
 void Menu::processEvents()
@@ -106,7 +98,7 @@ void Menu::processEvents()
                         {
                                     switch ((*itr).getID()) {
                                     case Forms::buttonID::Login:
-                                           login();
+
                                         break;
 
                                     case Forms::buttonID::Register:
@@ -125,11 +117,11 @@ void Menu::processEvents()
                         }
                     }
 
-                    form.checkClick(cursorPosition);
+                    form->checkClick(cursorPosition);
             }
 
             if(event.type == sf::Event::TextEntered)
-                form.processEvents(event);
+                form->processEvents(event);
 
         }
 

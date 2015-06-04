@@ -5,7 +5,6 @@
 #include "game.h"
 #include "menu.h"
 
-#include "parser.h"
 
 //TODO List
 //
@@ -23,7 +22,9 @@ public:
 
 private:
 
-    //Parser parser;
+    Menu* menuPointer;
+    Game* gamePointer;
+
     ResourceManager manager;
 };
 

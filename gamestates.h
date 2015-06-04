@@ -1,5 +1,12 @@
 #ifndef GAMESTATES_H
 #define GAMESTATES_H
+namespace NetworkCommands{
+        enum ID {
+                Login,
+                ListOfUsers,
+                Register
+                };
+    }
 
 namespace States{
     enum ID{

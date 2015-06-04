@@ -1,5 +1,4 @@
 #include "application.h"
-#include "networkoperator.h"
 
 Application::Application()
 {
@@ -20,14 +19,18 @@ void Application::run()
             case States::Menu:
             {
                 Menu menu;
+                menuPointer = &menu;
                 menu.run();
+                //delete menuPointer;
             }
             break;
 
             case States::Game:
             {
                 Game game;
+                gamePointer = &game;
                 game.run();
+                //delete gamePointer;
             }
             break;
 

@@ -6,8 +6,8 @@
 #include "gamestates.h"
 #include "resourcemanager.h"
 #include "button.h"
-#include "parser.h"
 #include "textbox.h"
+#include "messagesender.h"
 
 
 class Form : public sf::Drawable
@@ -17,7 +17,7 @@ public:
 
     bool exsist();
     void processEvents(sf::Event event);
-    void createForm(Textures::ID_InMenu id, sf::Vector2f position, Parser *parser);
+    void createForm(Textures::ID_InMenu id, sf::Vector2f position);
     void update(sf::Time deltaTime);
     void setCaption(std::string text);
 
@@ -28,10 +28,10 @@ public:
     void checkClick(sf::Vector2f cursorPosition);
 
 private:
+    MessageSender sender;
+
     bool isExsist = false;
     bool isClosed = false;
-
-    Parser* menuParser;
 
     sf::Vector2f pos;
 

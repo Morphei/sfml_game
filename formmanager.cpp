@@ -4,13 +4,12 @@ FormManager::FormManager()
 {
 }
 
-Form FormManager::createForm(Forms::ID id, sf::Vector2f position)
+Form* FormManager::createForm(Forms::ID id, sf::Vector2f position)
 {
-    Form form;
     switch (id) {
     case Forms::LoginForm:
         {
-            form.createForm(Textures::LoginForm, position, menuParser);
+            form.createForm(Textures::LoginForm, position);
             form.setCaption("Login");
 
             form.addLabel(sf::Vector2f(20, 70), "Login", Fonts::MainFont);
@@ -39,10 +38,5 @@ Form FormManager::createForm(Forms::ID id, sf::Vector2f position)
         break;
     }
 
-    return form;
-}
-
-void FormManager::setParser(Parser *parser)
-{
-    menuParser = parser;
+    return &form;
 }

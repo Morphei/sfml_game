@@ -1,11 +1,13 @@
-#include "application.h"
+
+#include "parser.h"
 #include <iostream>
 
 int main()
 {
 
-Application app;
-app.run();
+Parser parser;
+
+parser.run();
 
 }
 

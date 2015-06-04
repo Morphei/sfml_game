@@ -8,7 +8,6 @@
 #include "resourcemanager.h"
 #include "gamestates.h"
 #include "button.h"
-#include "parser.h"
 #include "formmanager.h"
 
 
@@ -19,7 +18,7 @@ public:
     void run();
 
 private:
-    void login();
+    void createLoginForm();
     void registerPlayer();
     void render();
     void update(sf::Time deltaTime);
@@ -29,13 +28,13 @@ private:
 
 
 private:
+    //MessageSender sender;
+
     sf::String str;
 
-    Form form;
+    Form* form;
 
     FormManager formManager;
-
-    Parser *parser;
 
     sf::Time TimePerFrame = sf::seconds(1.f/60.f);
 

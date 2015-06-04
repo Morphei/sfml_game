@@ -32,7 +32,8 @@ SOURCES += main.cpp \
     networkconfiguration.cpp \
     form.cpp \
     textbox.cpp \
-    formmanager.cpp
+    formmanager.cpp \
+    messagesender.cpp
 
 HEADERS += \
     menu.h \
@@ -55,6 +56,7 @@ HEADERS += \
     networkconfiguration.h \
     form.h \
     textbox.h \
-    formmanager.h
+    formmanager.h \
+    messagesender.h
 
 CONFIG += c++11

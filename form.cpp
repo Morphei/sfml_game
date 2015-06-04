@@ -44,7 +44,6 @@ void Form::addTextBox(Forms::textBoxID boxName ,sf::Vector2f position, Fonts::ID
     box.enableMask(enableMask);
 
     textBoxes.push_back(box);
-
 }
 
 
@@ -62,10 +61,9 @@ void Form::addButton(Forms::buttonID id, sf::Vector2f position, Textures::ID_InM
 {
     Button button(id, texture_normal, texture_pressed, position + pos);
     buttons.push_back(button);
-
 }
 
-void Form::createForm(Textures::ID_InMenu id, sf::Vector2f position, Parser* parser)
+void Form::createForm(Textures::ID_InMenu id, sf::Vector2f position)
 {
     isExsist = true;
 
@@ -74,8 +72,6 @@ void Form::createForm(Textures::ID_InMenu id, sf::Vector2f position, Parser* par
     formSprite.setPosition(position);
 
     pos = position;
-
-    menuParser = parser;
 }
 
 void Form::checkClick(sf::Vector2f cursorPosition)
@@ -109,7 +105,10 @@ void Form::checkClick(sf::Vector2f cursorPosition)
                         }
                     }
                     if(!isEmpty)
-                        menuParser->login(login, pass);
+                    {
+                        sender.login(login, pass);
+                    }
+
                 }
                 break;
             }

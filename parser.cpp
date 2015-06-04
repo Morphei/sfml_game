@@ -1,32 +1,17 @@
 #include "parser.h"
 
-Parser::Parser(Menu *owner) : recieveThread(&Parser::recieve, this)
+Parser::Parser() : recieveThread(&Parser::recieve, this)
 {
-    menu = owner;
     sendPort = 1234;
     std::cout << sendPort << "\n";
 }
 
-//Parser::Parser(Game *owner) : recieveThread(&Parser::recieve, this)
-//{
-//    game = owner;
-//}
-
-void Parser::requestListOfUsers()
+void Parser::run()
 {
-    sf::Packet normpacket;
-    sendPort = 1234;
-    normpacket << MARK << sendPort << Commands::ListOfUsers;
-    netOperator.send(normpacket);
-}
-
-void Parser::login(std::string login, std::string pass)
-{
-    sf::Packet packet;
-    sendPort = 1234;
-    packet << MARK << sendPort << Commands::Login << login << pass;
-    std::cout << sendPort << "\n";
-    netOperator.send(packet);
+    netOperator.bind();
+    startRecieve();
+    application.run();
+    stop();
 }
 
 void Parser::recieve()
@@ -45,11 +30,11 @@ void Parser::recieve()
             int temp;
             packet >> temp;
             std::cout << "Parsing command from temp[" << temp << "]\n";
-            command = static_cast<Commands::ID>(temp);
+            command = static_cast<NetworkCommands::ID>(temp);
             std::cout << "Packet with command " << command << "\n";
             switch (command) {
 
-            case Commands::Login:
+            case NetworkCommands::Login:
                 {
                     bool isLogin;
                     packet >> isLogin;
@@ -57,7 +42,7 @@ void Parser::recieve()
                     if(isLogin)
                     {
                         std::cout << "Login OK" << std::endl;
-//                        requestListOfUsers();
+                        messenger.requestListOfUsers();
                         //menu->formManager.createForm(Forms::ChooseCharacters, 100, 100);
                     }
 
@@ -68,7 +53,7 @@ void Parser::recieve()
                 }
             break;
 
-            case Commands::ListOfUsers:
+            case NetworkCommands::ListOfUsers:
                 {
                     int count;
                     std::string nickname;
@@ -82,7 +67,7 @@ void Parser::recieve()
                 }
             break;
 
-            case Commands::Register:
+            case NetworkCommands::Register:
                 {
 
                 }
