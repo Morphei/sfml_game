@@ -1,6 +1,8 @@
 #ifndef NETWORKOPERATOR_H
 #define NETWORKOPERATOR_H
 
+#include "iostream"
+
 #include <SFML/Network.hpp>
 #include "networkconfiguration.h"
 
@@ -19,10 +21,19 @@ public:
     void connect();
     void send(sf::Packet packet);
     sf::Packet recieve();
+    bool started();
+
 
 private:
 
+    sf::IpAddress ip;
+    unsigned short port;
+
+    bool isStarted = true;
     sf::UdpSocket socket;
+    sf::Mutex mutex;
+
+
 
 
 };

@@ -3,7 +3,7 @@
 
 Application::Application()
 {
-    setState(States::Game);//TODO: Changed to intro
+    setState(States::Menu);//TODO: Changed to intro
     manager.load();
 }
 

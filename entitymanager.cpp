@@ -20,7 +20,7 @@ void EntityManager::movePlayer(sf::Vector2f target)
 
 void EntityManager::initDefault()
 {
-    mPlayer.setType(EntityState::Paladin);
+    mPlayer.setType(EntityState::Amazon);
 
     addEnemy(EntityState::Amazon, sf::Vector2f(400,400));
 

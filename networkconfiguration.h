@@ -5,5 +5,5 @@
 
 extern sf::IpAddress SERVER_IP;
 extern unsigned short  SERVER_PORT;
-extern int MARK;
+extern unsigned short const MARK;
 #endif // NETWORKCONFIGURATION_H

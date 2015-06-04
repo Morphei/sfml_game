@@ -27,6 +27,7 @@ private:
     void startNew();
     void exit();
 
+
 private:
     sf::String str;
 
@@ -41,16 +42,8 @@ private:
     sf::Vector2f cursorPosition;
     sf::Vector2i pixelPos;
 
-    enum buttonID{
-        Login,
-        Register,
-        Settings,
-        Exit
-    };
-
-    buttonID buttonNames;
-    std::map<buttonID, Button> buttons;
-    std::map<buttonID, Button>::iterator itr;
+    std::vector<Button> buttons;
+    std::vector<Button>::iterator itr;
 
     sf::RenderWindow mWindow;
 

@@ -1,9 +1,11 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
-#include "game.h"
-#include "menu.h"
 #include "gamestates.h"
 #include "resourcemanager.h"
+#include "game.h"
+#include "menu.h"
+
+#include "parser.h"
 
 //TODO List
 //
@@ -20,6 +22,8 @@ public:
     void setState(States::ID id);
 
 private:
+
+    //Parser parser;
     ResourceManager manager;
 };
 

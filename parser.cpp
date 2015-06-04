@@ -3,86 +3,99 @@
 Parser::Parser(Menu *owner) : recieveThread(&Parser::recieve, this)
 {
     menu = owner;
+    sendPort = 1234;
+    std::cout << sendPort << "\n";
 }
 
-Parser::Parser(Game *owner) : recieveThread(&Parser::recieve, this)
-{
-    game = owner;
-}
+//Parser::Parser(Game *owner) : recieveThread(&Parser::recieve, this)
+//{
+//    game = owner;
+//}
 
 void Parser::requestListOfUsers()
 {
     sf::Packet normpacket;
-    normpacket << MARK << Commands::ListOfUsers;
+    sendPort = 1234;
+    normpacket << MARK << sendPort << Commands::ListOfUsers;
     netOperator.send(normpacket);
-    std::cout << "Sending packet" << std::endl;
 }
 
 void Parser::login(std::string login, std::string pass)
 {
     sf::Packet packet;
-    packet << MARK << Commands::Login << login << pass;
+    sendPort = 1234;
+    packet << MARK << sendPort << Commands::Login << login << pass;
+    std::cout << sendPort << "\n";
     netOperator.send(packet);
-}
-
-void Parser::initNetwork()
-{
-    netOperator.connect();
 }
 
 void Parser::recieve()
 {
-    sf::Packet packet = netOperator.recieve();
+    while(true)
+        {
+        sf::Packet packet = netOperator.recieve();
 
-    int mark;
+        unsigned short mark;
 
-    packet >> mark;
+        packet >> mark;
 
-    if(mark = MARK)
-    {
+        if(mark = MARK)
+        {
 
-        int temp;
-        packet >> temp;
-        command = static_cast<Commands::ID>(temp);
+            int temp;
+            packet >> temp;
+            std::cout << "Parsing command from temp[" << temp << "]\n";
+            command = static_cast<Commands::ID>(temp);
+            std::cout << "Packet with command " << command << "\n";
+            switch (command) {
 
-        switch (command) {
-        case Commands::Login:
-            {
-                bool isLogin;
-                packet >> isLogin;
-
-                if(isLogin)
+            case Commands::Login:
                 {
-                    std::cout << "Login OK" << std::endl;//TODO: Create login in menu
+                    bool isLogin;
+                    packet >> isLogin;
+
+                    if(isLogin)
+                    {
+                        std::cout << "Login OK" << std::endl;
+//                        requestListOfUsers();
+                        //menu->formManager.createForm(Forms::ChooseCharacters, 100, 100);
+                    }
+
+                    else
+                    {
+                        std::cout << "NotLogin NeOK" << std::endl;
+                    }
+                }
+            break;
+
+            case Commands::ListOfUsers:
+                {
+                    int count;
+                    std::string nickname;
+                    packet >> count;
+                    std::cout << "You have " << count << " charachters, which is: " << std::endl;
+                    for(int i = 0; i < count; i++)
+                    {
+                        packet >> nickname;
+                        std::cout << nickname << std::endl;
+                    }
+                }
+            break;
+
+            case Commands::Register:
+                {
 
                 }
 
-                else
-                {
-                    std::cout << "NotLogin NeOK" << std::endl;//TODO: Create login in menu
-                }
-            }
+            break;
 
-        case Commands::ListOfUsers:
-            {
-                int count;
-                std::string nickname;
-                packet >> count;
-                std::cout << "You have " << count << " charachters, which is: " << std::endl;
-                for(int i = 0; i < count; i++)
-                {
-                    packet >> nickname;
-                    std::cout << nickname << std::endl;
-                }
+            default:
+                std::cout << "404\n";
+            break;
             }
-        break;
-
-        case Commands::Register:
-            {
-
-            }
-        break;
         }
+        else std::cout << "MARK ne norm\n";
+
     }
 }
 

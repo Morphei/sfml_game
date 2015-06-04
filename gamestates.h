@@ -13,13 +13,26 @@ namespace States{
 namespace Forms {
 
     enum ID{
-        Register,
-        Login
+        RegisterForm,
+        LoginForm,
+        ChooseCharacters
     };
 
     enum Components{
         TextBox,
         Label
+    };
+
+    enum buttonID{
+        Login,
+        Register,
+        Settings,
+        Exit
+    };
+
+    enum textBoxID{
+        LoginTextBox,
+        PasswordTextBox
     };
 
 }

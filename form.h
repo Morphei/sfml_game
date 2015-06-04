@@ -6,6 +6,7 @@
 #include "gamestates.h"
 #include "resourcemanager.h"
 #include "button.h"
+#include "parser.h"
 #include "textbox.h"
 
 
@@ -16,33 +17,39 @@ public:
 
     bool exsist();
     void processEvents(sf::Event event);
-    void createForm(Textures::ID_InMenu id, sf::Vector2f position);
+    void createForm(Textures::ID_InMenu id, sf::Vector2f position, Parser *parser);
     void update(sf::Time deltaTime);
     void setCaption(std::string text);
-    void addTextBox(sf::Vector2f position, Fonts::ID_InMenu id);
+
+    void addTextBox(Forms::textBoxID boxName ,sf::Vector2f position, Fonts::ID_InMenu id, bool enableMask);
     void addLabel(sf::Vector2f position, std::string text, Fonts::ID_InMenu fontID);
+    void addButton(Forms::buttonID id, sf::Vector2f position, Textures::ID_InMenu id_normal, Textures::ID_InMenu id_pressed);
+
     void checkClick(sf::Vector2f cursorPosition);
 
 private:
     bool isExsist = false;
     bool isClosed = false;
 
+    Parser* menuParser;
+
     sf::Vector2f pos;
 
-    Button *closeButton;
-
     std::vector<sf::Text> labels;
+    std::vector<TextBox>::iterator boxIterator;
     std::vector<TextBox> textBoxes;
+    std::vector<Button> buttons;
 
     sf::Sprite formSprite;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
             target.draw(formSprite);
-            target.draw(*closeButton);
             for(auto i = labels.begin(); i != labels.end(); i++)
                 target.draw(*i);
             for(auto i = textBoxes.begin(); i != textBoxes.end(); i++)
+                target.draw(*i);
+            for(auto i = buttons.begin(); i != buttons.end(); i++)
                 target.draw(*i);
     }
 

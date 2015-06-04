@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "resourcemanager.h"
+#include "gamestates.h"
 
 //  TODO List
 //
@@ -16,19 +17,29 @@ class Button : public sf::Drawable
 {
 public:
 
-    Button(Textures::ID_InMenu, Textures::ID_InMenu, sf::String caption, int posX, int posY);
-    Button(Textures::ID_InMenu, Textures::ID_InMenu, int posX, int posY);
+    Button(Forms::buttonID id, Textures::ID_InMenu, Textures::ID_InMenu, sf::String caption, sf::Vector2f pos);
+    Button(Forms::buttonID id, Textures::ID_InMenu, Textures::ID_InMenu, sf::Vector2f pos);
+
     bool checkClick(sf::Vector2f mousePos);
+
+    Forms::buttonID getID();
+
     void update();
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+    Forms::buttonID buttonID;
+
     sf::Sprite spriteNormal;
     sf::Sprite spriteClicked;
+
     sf::Sprite currentSprite;
+
     sf::String text;
+
     sf::Vector2f position;
+
     sf::Time toPressed = sf::seconds(1.f/2.f);
     sf::Time dt;
 

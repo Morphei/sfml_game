@@ -2,28 +2,32 @@
 
 NetworkOperator::NetworkOperator()
 {
+    if (socket.bind(SERVER_PORT) != sf::Socket::Done)
+    {
+        throw std::runtime_error("Failed to bind");
+    }
 
 }
 
 void NetworkOperator::connect()
 {
-    if (socket.bind(SERVER_PORT) != sf::Socket::Done)
-    {
-        throw std::runtime_error("Failed to bind");
 
-    }
 }
 
 void NetworkOperator::send(sf::Packet packet)
 {
-    socket.send(packet, SERVER_IP, SERVER_PORT);
+
+    sf::UdpSocket sendSocket;
+
+    sendSocket.send(packet, SERVER_IP, SERVER_PORT);
+
 }
 
 sf::Packet NetworkOperator::recieve()
 {
         sf::Packet packet;
 
-        if(socket.receive(packet, SERVER_IP, SERVER_PORT) == sf::Socket::Done)
+        if(socket.receive(packet, ip, port) == sf::Socket::Done)
         {
             return packet;
         }

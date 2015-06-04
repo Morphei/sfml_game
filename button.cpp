@@ -1,14 +1,15 @@
 #include "button.h"
 
-Button::Button(Textures::ID_InMenu up, Textures::ID_InMenu down, sf::String caption, int posX, int posY)
+Button::Button(Forms::buttonID id, Textures::ID_InMenu up, Textures::ID_InMenu down, sf::String caption, sf::Vector2f pos)
 {
+    buttonID = id;
+
     spriteNormal.setTexture(textureHolderMenu.get(up));
     spriteClicked.setTexture(textureHolderMenu.get(down));
 
     text = caption;
 
-    position.x = posX;
-    position.y = posY;
+    position = pos;
 
     spriteClicked.setPosition(position);
     spriteNormal.setPosition(position);
@@ -17,13 +18,14 @@ Button::Button(Textures::ID_InMenu up, Textures::ID_InMenu down, sf::String capt
     isText = true;
 }
 
-Button::Button(Textures::ID_InMenu up, Textures::ID_InMenu down, int posX, int posY)
+Button::Button(Forms::buttonID id, Textures::ID_InMenu up, Textures::ID_InMenu down, sf::Vector2f pos)
 {
+    buttonID = id;
+
     spriteNormal.setTexture(textureHolderMenu.get(up));
     spriteClicked.setTexture(textureHolderMenu.get(down));
 
-    position.x = posX;
-    position.y = posY;
+    position = pos;
 
     spriteClicked.setPosition(position);
     spriteNormal.setPosition(position);
@@ -43,6 +45,11 @@ bool Button::checkClick(sf::Vector2f mousePos)
     }
     else
         return false;
+}
+
+Forms::buttonID Button::getID()
+{
+    return buttonID;
 }
 
 void Button::update()
