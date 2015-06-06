@@ -10,8 +10,4 @@ void Player::setSpeed(int spd)
     mSpeed = spd;
 }
 
-void Player::initDefault()
-{
-}
-
 

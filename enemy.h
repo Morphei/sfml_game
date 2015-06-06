@@ -8,8 +8,7 @@ class Enemy : public Entity
 public:
     Enemy();
 
-    void initDefault();
-    void init();
+    bool checkClick(sf::Vector2f pos);
 
 private:
 

@@ -20,22 +20,26 @@ void Application::run()
             {
                 Menu menu;
                 menuPointer = &menu;
-                menu.run();
+                player = menu.run();
                 //delete menuPointer;
             }
             break;
 
             case States::Game:
             {
-                Game game;
+                Game game(player);
                 gamePointer = &game;
                 game.run();
+                //game.mWorld.initPlayer();
                 //delete gamePointer;
             }
             break;
 
             case States::Close:
-
+            {
+                delete gamePointer;
+                delete menuPointer;
+            }
             break;
         }
     }
@@ -44,4 +48,14 @@ void Application::run()
 void Application::setState(States::ID id)
 {
     gameState = id;
+}
+
+void Application::runGame()
+{
+    run();
+}
+
+void Application::setPlayer(sf::Packet packet)
+{
+    playerPacket = packet;
 }

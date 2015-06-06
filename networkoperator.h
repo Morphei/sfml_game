@@ -19,6 +19,7 @@ class NetworkOperator
 public:
     NetworkOperator();
     void bind();
+    void unbind();
     void send(sf::Packet packet);
     sf::Packet recieve();
     bool started();

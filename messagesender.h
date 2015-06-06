@@ -10,12 +10,16 @@ class MessageSender
 public:
     MessageSender();
 
+    void sendMouseClick(sf::Vector2f pos);
+    void inGame();
     void send(NetworkCommands::ID id, sf::Packet packet);
     void requestListOfUsers();
     void login(std::string login, std::string pass);
+    void registerNew(std::string login, std::string pass);
+    void sendChoosenChar(std::string id);
 
 private:
-    unsigned short sendPort = 1234;
+//    unsigned short sendPort = LOCAL_PORT;
     NetworkCommands::ID command;
     NetworkOperator netOperator;
 };

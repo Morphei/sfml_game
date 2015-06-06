@@ -113,3 +113,8 @@ void Animation::setSize(sf::Vector2i norm, sf::Vector2i att, sf::Vector2i run)
     runSize = run;
     attackSize = att;
 }
+
+sf::Sprite* Animation::getSprite()
+{
+    return &mSprite;
+}

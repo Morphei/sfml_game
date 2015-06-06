@@ -72,6 +72,13 @@ void TextBox::init(Forms::textBoxID boxName, sf::Vector2f pos, Fonts::ID_InMenu 
     ifEmpty.setString("|");
 }
 
+void TextBox::clear()
+{
+    boxText.setString("");
+    boxMask.setString("");
+
+}
+
 std::string TextBox::getText()
 {
     return boxText.getString();

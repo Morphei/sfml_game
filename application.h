@@ -4,6 +4,7 @@
 #include "resourcemanager.h"
 #include "game.h"
 #include "menu.h"
+#include "player.h"
 
 
 //TODO List
@@ -19,12 +20,15 @@ public:
     Application();
     void run();
     void setState(States::ID id);
-
-private:
-
+    void runGame();
+    void setPlayer(sf::Packet packet);
     Menu* menuPointer;
     Game* gamePointer;
 
+private:
+
+    Player player;
+    sf::Packet playerPacket;
     ResourceManager manager;
 };
 

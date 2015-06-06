@@ -34,6 +34,16 @@ void Entity::update(sf::Time deltaTime)
 
 }
 
+void Entity::setName(std::string name)
+{
+    nickname = name;
+}
+
+std::string Entity::getName()
+{
+    return nickname;
+}
+
 void Entity::setPosition(sf::Vector2f pos)
 {
     mPosition = pos;
@@ -47,15 +57,33 @@ void Entity::setPosition(float vx, float vy)
     mAnimation.setPosition(mPosition);
 }
 
+void Entity::setStats(EntityState::statsOfEntity stats)
+{
+    statsOfEntity = stats;
+}
+
 sf::Vector2f Entity::getPosition() const
 {
     return mPosition;
+}
+
+void Entity::colourise()
+{
+   sf::Sprite* sprite = mAnimation.getSprite();
+   sprite->setColor(sf::Color::Green);
+}
+
+void Entity::unColourise()
+{
+    sf::Sprite* sprite = mAnimation.getSprite();
+    sprite->setColor(sf::Color::White);
 }
 
 void Entity::setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun)
 {
     mAnimation.setTexture(id);
     mAnimation.setSize(sizeNorm, sizeAttack, sizeRun);
+    std::cout << "setting texture&size to animation\n";
 }
 
 void Entity::initDefault()

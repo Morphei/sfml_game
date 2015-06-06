@@ -1,10 +1,17 @@
 #ifndef GAMESTATES_H
 #define GAMESTATES_H
+
 namespace NetworkCommands{
         enum ID {
                 Login,
                 ListOfUsers,
-                Register
+                Register,
+                NewChar,
+                SendChoosenChar,
+                DeleteChar,
+                InGame,
+                AddEnemy,
+                MouseClick
                 };
     }
 
@@ -22,7 +29,8 @@ namespace Forms {
     enum ID{
         RegisterForm,
         LoginForm,
-        ChooseCharacters
+        ChooseCharacters,
+        CreateNewChar
     };
 
     enum Components{
@@ -34,7 +42,10 @@ namespace Forms {
         Login,
         Register,
         Settings,
-        Exit
+        Exit,
+        Play,
+        New_Char,
+        Cancel
     };
 
     enum textBoxID{
@@ -77,15 +88,15 @@ namespace EntityState{
         Amazon,
         Paladin,
         Sorcerer,
-        EagleRat
+        EagleRat,
+        None
     };
 
     struct statsOfEntity{
-        int health;
-        int manaPoints;
-        int expirience;
-        int attack;
-        int defence;
+            unsigned short hitPoints;
+            unsigned short manaPoints;
+            unsigned short attack;
+            unsigned short defence;
     };
 
 }

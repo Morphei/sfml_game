@@ -15,24 +15,28 @@ class Menu
 {
 public:
     Menu();
-    void run();
+    Player run();
+    void createLoginForm();
+    void createChooseCharactersForm();
+    void exit();
+    void close();
+    void startNew();
+    Form* form;
+    void initPlayer(EntityState::typeOfEntity id, sf::Vector2f position, EntityState::statsOfEntity stats);
 
 private:
-    void createLoginForm();
-    void registerPlayer();
+    Player player;
+
     void render();
     void update(sf::Time deltaTime);
     void processEvents();
-    void startNew();
-    void exit();
+
+
 
 
 private:
-    //MessageSender sender;
 
     sf::String str;
-
-    Form* form;
 
     FormManager formManager;
 

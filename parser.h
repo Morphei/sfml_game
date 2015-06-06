@@ -7,7 +7,11 @@
 #include "networkoperator.h"
 #include "application.h"
 #include "messagesender.h"
+#include "form.h"
 
+
+
+//TODO - segfault after thread.terminate()
 
 class Parser
 {
@@ -16,18 +20,20 @@ public:
     Parser();
 
     void run();
+
     void recieve();
     void stop();
     void startRecieve();
 
 private:
+    bool stopRecieve = false;
 
-    unsigned short sendPort;
+    sf::Mutex mutex;
 
     MessageSender messenger;
 
     Application application;
-    NetworkOperator netOperator;
+    NetworkOperator* netOperator;
     NetworkCommands::ID command;
     sf::Thread recieveThread;
 };

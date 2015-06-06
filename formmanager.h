@@ -10,7 +10,7 @@ class FormManager
 public:
     FormManager();
 
-    Form* createForm(Forms::ID id, sf::Vector2f position);
+    Form *createForm(Forms::ID id, sf::Vector2f position);
 
 private:
     Form form;

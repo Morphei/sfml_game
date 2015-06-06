@@ -17,6 +17,7 @@ textureHolder.load(Textures::Landscape, "map2.png");
 
 
 textureHolderMenu.load(Textures::LoginForm, "LoginForm.png");
+textureHolderMenu.load(Textures::ChooseForm, "CharsForm.png");
 textureHolderMenu.load(Textures::RegisterForm, "RegisterForm.png");
 textureHolderMenu.load(Textures::MenuBackground, "MenuBackground.png");
 textureHolderMenu.load(Textures::LoginButton, "LoginButtonNormal.png");

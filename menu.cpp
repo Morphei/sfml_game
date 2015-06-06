@@ -4,18 +4,19 @@
 Menu::Menu() : mWindow(sf::VideoMode(1366,768), "Arms Race", sf::Style::Fullscreen)
 {
 
+
+}
+
+Player Menu::run()
+{
     Button but2(Forms::buttonID::Exit, Textures::ExitButton, Textures::ExitButtonPressed, sf::Vector2f(100, 650));
 
     buttons.push_back(but2);
 
     background.setTexture(textureHolderMenu.get(Textures::MenuBackground));
 
-
-}
-
-void Menu::run()
-{
     createLoginForm();
+//    createChooseCharactersForm();
 
     sf::Clock mainClock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -34,16 +35,7 @@ void Menu::run()
 
             render();
     }
-}
-
-void Menu::createLoginForm()
-{
-    form = formManager.createForm(Forms::LoginForm, sf::Vector2f(1100,50));
-}
-
-void Menu::registerPlayer()
-{
-    //form = formManager.createForm(Forms::Register, sf::Vector2f(1000,10));
+    return player;
 }
 
 void Menu::render()
@@ -64,6 +56,10 @@ void Menu::render()
 
 void Menu::update(sf::Time deltaTime)
 {
+    if(gameState!= States::Menu)
+    {
+        mWindow.close();
+    }
     for(itr = buttons.begin(); itr!= buttons.end(); itr++)
     {
             (*itr).update();
@@ -102,7 +98,7 @@ void Menu::processEvents()
                                         break;
 
                                     case Forms::buttonID::Register:
-                                            registerPlayer();
+
                                         break;
 
                                     case Forms::buttonID::Settings:
@@ -128,16 +124,38 @@ void Menu::processEvents()
 
 }
 
+void Menu::createLoginForm()
+{
+    form = formManager.createForm(Forms::LoginForm, sf::Vector2f(1100,50));
+}
+
+void Menu::createChooseCharactersForm()
+{
+    form = formManager.createForm(Forms::ChooseCharacters, sf::Vector2f(300, 50));
+}
+
 void Menu::startNew()
 {
-    //parser->stop();
     gameState = States::Game;
     mWindow.close();
 }
 
+void Menu::initPlayer(EntityState::typeOfEntity id, sf::Vector2f position, EntityState::statsOfEntity stats)
+{
+    player.setPosition(position);
+    player.setStats(stats);
+    player.setType(id);
+}
+
 void Menu::exit()
 {
-    //parser->stop();
+    form->close();
     gameState = States::Close;
+    mWindow.close();
+}
+
+void Menu::close()
+{
+    form->close();
     mWindow.close();
 }

@@ -7,10 +7,17 @@ NetworkOperator::NetworkOperator()
 
 void NetworkOperator::bind()
 {
-    if (socket.bind(SERVER_PORT) != sf::Socket::Done)
+    if (socket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
     {
         throw std::runtime_error("Failed to bind");
     }
+    LOCAL_PORT = socket.getLocalPort();
+    std::cout << "Local port is " << LOCAL_PORT << "\n";
+}
+
+void NetworkOperator::unbind()
+{
+    socket.unbind();
 }
 
 void NetworkOperator::send(sf::Packet packet)
@@ -28,6 +35,7 @@ sf::Packet NetworkOperator::recieve()
 
         if(socket.receive(packet, ip, port) == sf::Socket::Done)
         {
+
             return packet;
         }
 }

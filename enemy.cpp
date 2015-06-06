@@ -5,13 +5,12 @@ Enemy::Enemy()
 
 }
 
-void Enemy::initDefault()
+bool Enemy::checkClick(sf::Vector2f pos)
 {
-//    mAnimation.setTexture(Textures::Player);
-//    mAnimation.setPosition(mPosition);
-//    state = Normal;
-//    dir = Up;
-//    mAnimation.init(state, dir);
+    if(mAnimation.getSprite()->getGlobalBounds().contains(pos))
+        return true;
+    else return false;
 }
+
 
 

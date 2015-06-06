@@ -18,8 +18,13 @@ public:
     Entity();
     virtual void update(sf::Time deltaTime);
 
+    virtual void setName(std::string name);
+
     virtual void setPosition(sf::Vector2f pos);
+
     virtual void setPosition(float vx, float vy);
+
+    virtual void setStats(EntityState::statsOfEntity stats);
 
     virtual void setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun);
 
@@ -35,7 +40,14 @@ public:
 
     virtual sf::Vector2f getPosition() const;
 
+    std::string getName();
+
+    virtual void colourise();
+
+    virtual void unColourise();
+
 protected:
+    std::string nickname;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
@@ -62,7 +74,7 @@ protected:
 
     EntityState::direction dir;
 
-    EntityState::statsOfEntity stats;
+    EntityState::statsOfEntity statsOfEntity;
 
     EntityState::stateOfObject state;
 

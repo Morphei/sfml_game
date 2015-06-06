@@ -28,7 +28,8 @@ namespace Textures {
                             ExitButtonPressed,
                             CloseButton,
                             CloseButtonPressed,
-                            TextBox
+                            TextBox,
+                            ChooseForm
                        };
     }
 

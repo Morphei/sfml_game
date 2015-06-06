@@ -11,8 +11,6 @@ public:
 
     void setSpeed(int spd);
 
-    void initDefault();
-
 private:
 
 };

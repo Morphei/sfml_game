@@ -16,6 +16,7 @@
 class Button : public sf::Drawable
 {
 public:
+    void setVisible(bool isVis);
 
     Button(Forms::buttonID id, Textures::ID_InMenu, Textures::ID_InMenu, sf::String caption, sf::Vector2f pos);
     Button(Forms::buttonID id, Textures::ID_InMenu, Textures::ID_InMenu, sf::Vector2f pos);
@@ -27,6 +28,8 @@ public:
     void update();
 
 private:
+    bool visible = true;
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     Forms::buttonID buttonID;

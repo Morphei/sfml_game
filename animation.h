@@ -24,6 +24,10 @@ public:
 
     void setSize(sf::Vector2i norm, sf::Vector2i att, sf::Vector2i run);
 
+    void setSprite(sf::Sprite sprite);
+
+    sf::Sprite *getSprite();
+
 private:
 
     sf::Vector2f mPosition;

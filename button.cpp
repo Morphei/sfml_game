@@ -1,5 +1,10 @@
 #include "button.h"
 
+void Button::setVisible(bool isVis)
+{
+    visible = isVis;
+}
+
 Button::Button(Forms::buttonID id, Textures::ID_InMenu up, Textures::ID_InMenu down, sf::String caption, sf::Vector2f pos)
 {
     buttonID = id;
@@ -70,5 +75,6 @@ void Button::update()
 
 void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+    if(visible)
     target.draw(currentSprite);
 }
