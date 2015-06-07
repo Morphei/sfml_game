@@ -22,7 +22,7 @@ public:
     void setTexture(Textures::ID_InGame id);
 
 private:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
     sf::CircleShape shape;

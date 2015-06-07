@@ -1,8 +1,10 @@
 #include "parser.h"
+#include "unistd.h"
 
 Parser::Parser() : recieveThread(&Parser::recieve, this)
 {
     netOperator = new NetworkOperator;
+    XInitThreads();
 }
 
 void Parser::run()
@@ -37,12 +39,11 @@ void Parser::recieve()
 
             case NetworkCommands::Login:
                 {
-                    packet.clear();
                     std::cout << "Logining = " << command << "\n";
-                    bool isLogin;
-                    packet >> isLogin;
-                    std::cout << "Is Login = " << isLogin << "\n";
-                    if(isLogin)
+                    bool login;
+                    packet >> login;
+                    std::cout << "Is Login = " << login << "\n";
+                    if(login)
                     {
                         std::cout << "Login OK" << std::endl;
                         messenger.requestListOfUsers();
@@ -61,6 +62,7 @@ void Parser::recieve()
                     unsigned short type;
                     std::string nickname;
                     EntityState::typeOfEntity id;
+
                     application.menuPointer->createChooseCharactersForm();
 
                     std::cout << "creating choose form\n";
@@ -72,7 +74,11 @@ void Parser::recieve()
                     {
                         packet >> nickname;
                         std::cout << "Nickname: " << nickname << "\n";
-                        application.menuPointer->form->addLabel(sf::Vector2f(i*80+10, 0), nickname, Fonts::MainFont);
+
+                        mutex.lock();
+                        application.menuPointer->formManager.form->addLabel(sf::Vector2f(i*120+10, 100), nickname, Fonts::MainFont);
+                        mutex.unlock();
+
                         std::cout << nickname << " - ";
 
                         packet >> type;
@@ -81,9 +87,9 @@ void Parser::recieve()
 
                         std::cout << "Char " << i+1 << " - " << nickname << " is type " << id << "\n";
 
-                        application.menuPointer->form->addChars(id, nickname, sf::Vector2f(i*80 + 40, 100));
+                        application.menuPointer->formManager.form->addChars(id, nickname, sf::Vector2f(i*120 + 40, 200));
 
-                                                std::cout << "adding char\n";
+                        std::cout << "adding char\n";
                     }
 
                 }
@@ -121,9 +127,9 @@ void Parser::recieve()
                 EntityState::statsOfEntity stats;
                 packet >> stats.attack >> stats.defence >> stats.hitPoints >> stats.manaPoints;
 
-                std::cout << "Init player\n";
-                //application.menuPointer->initPlayer(static_cast<EntityState::typeOfEntity>(type), sf::Vector2f(100,100), stats);
-                while(!application.gamePointer->started())
+                std::cout << "Init player [parser.cpp]\n";
+
+                while(application.gamePointer == nullptr)
                 {
 
                 }
@@ -153,6 +159,15 @@ void Parser::recieve()
                 packet >> nick >> pos.x >> pos.y;
                 std::cout << nick << " move to " << pos.x << ":" << pos.y << "\n";
                 application.gamePointer->mWorld.moveEnemy(nick, pos);
+            }
+                break;
+
+            case NetworkCommands::NewChar:
+            {
+                bool isCreate;
+                packet >> isCreate;
+                if(isCreate)
+                    messenger.requestListOfUsers();
             }
                 break;
             default:

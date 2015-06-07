@@ -17,6 +17,7 @@ Player Menu::run()
 
     createLoginForm();
 //    createChooseCharactersForm();
+//    formManager.createForm(Forms::CreateNewChar, sf::Vector2f(110,100));
 
     sf::Clock mainClock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -48,8 +49,7 @@ void Menu::render()
         mWindow.draw((*itr));
     }
 
-    if(form->exsist())
-    mWindow.draw(*form);
+    mWindow.draw(formManager);
 
     mWindow.display();
 }
@@ -65,8 +65,7 @@ void Menu::update(sf::Time deltaTime)
             (*itr).update();
     }
 
-    if(form->exsist())
-    form->update(deltaTime);
+    formManager.update(deltaTime);
 }
 
 void Menu::processEvents()
@@ -113,11 +112,11 @@ void Menu::processEvents()
                         }
                     }
 
-                    form->checkClick(cursorPosition);
+                    formManager.checkClick(cursorPosition);
             }
 
             if(event.type == sf::Event::TextEntered)
-                form->processEvents(event);
+                formManager.processEvents(event);
 
         }
 
@@ -126,12 +125,12 @@ void Menu::processEvents()
 
 void Menu::createLoginForm()
 {
-    form = formManager.createForm(Forms::LoginForm, sf::Vector2f(1100,50));
+    formManager.createForm(Forms::LoginForm, sf::Vector2f(1100,50));
 }
 
 void Menu::createChooseCharactersForm()
 {
-    form = formManager.createForm(Forms::ChooseCharacters, sf::Vector2f(300, 50));
+    formManager.createForm(Forms::ChooseCharacters, sf::Vector2f(500, 250));
 }
 
 void Menu::startNew()
@@ -149,13 +148,13 @@ void Menu::initPlayer(EntityState::typeOfEntity id, sf::Vector2f position, Entit
 
 void Menu::exit()
 {
-    form->close();
+    formManager.close();
     gameState = States::Close;
     mWindow.close();
 }
 
 void Menu::close()
 {
-    form->close();
+    formManager.close();
     mWindow.close();
 }

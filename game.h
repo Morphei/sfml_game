@@ -34,9 +34,10 @@ const sf::Time TimePerFrame = sf::seconds(1.f/60.f);
 class Game
 {
 public:
-                Game(Player player);
+                Game();
     void        run();
     bool        started();
+    void exit();
 
     World mWorld;
 

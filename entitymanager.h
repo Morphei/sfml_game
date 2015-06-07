@@ -12,6 +12,8 @@ class EntityManager : public sf::Drawable
 public:
     EntityManager();
 
+    EntityState::typeOfEntity getSelectedEnemyType();
+
     void checkClick(sf::Vector2f cursorPos);
 
     std::string getSeectedEnemy();
@@ -33,10 +35,12 @@ private:
 
     std::string selectedEnemy;
 
+    EntityState::typeOfEntity selectedEnemyType;
+
     Player mPlayer;
 
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 };
 

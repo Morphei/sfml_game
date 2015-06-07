@@ -12,17 +12,23 @@ void EntityManager::checkClick(sf::Vector2f cursorPos)
     {
         if((*itr).checkClick(cursorPos))
             {
+            for(auto itr2 = enemies.begin(); itr2 != enemies.end(); itr2++)
+                (*itr2).unColourise();
             (*itr).colourise();
             selectedEnemy = (*itr).getName();
+            selectedEnemyType = (*itr).getType();
             }
-        else (*itr).unColourise();
-        i++;
     }
 }
 
 std::string EntityManager::getSeectedEnemy()
 {
     return selectedEnemy;
+}
+
+EntityState::typeOfEntity EntityManager::getSelectedEnemyType()
+{
+    return selectedEnemyType;
 }
 
 void EntityManager::addEnemy(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos)
@@ -52,9 +58,13 @@ void EntityManager::initPlayer(Player pl)
 
 void EntityManager::initPlayer(EntityState::typeOfEntity type, sf::Vector2f pos, EntityState::statsOfEntity stats)
 {
+    std::cout << "Setting type of player\n";
     mPlayer.setType(type);
+    std::cout << "Setting position\n";
     mPlayer.setPosition(pos);
+    std::cout << "Setting stats\n";
     mPlayer.setStats(stats);
+    std::cout << "Exit init player\n";
 }
 
 void EntityManager::movePlayer(sf::Vector2f target)

@@ -36,6 +36,8 @@ public:
 
     virtual void setType(EntityState::typeOfEntity enType);
 
+    virtual EntityState::typeOfEntity getType();
+
     virtual void setSpeed(int spd);
 
     virtual sf::Vector2f getPosition() const;
@@ -49,7 +51,7 @@ public:
 protected:
     std::string nickname;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(mAnimation, states);
     }

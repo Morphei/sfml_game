@@ -5,6 +5,22 @@ MessageSender::MessageSender()
 {
 }
 
+void MessageSender::sendCreateNewChar(std::string nickname, EntityState::typeOfEntity type)
+{
+    sf::Packet packet;
+    packet << MARK << LOCAL_PORT << NetworkCommands::NewChar << nickname << type;
+    netOperator.send(packet);
+    std::cout << "MessageSender::SendingNewChar\n";
+}
+
+void MessageSender::exitGame()
+{
+    sf::Packet packet;
+    packet << MARK << LOCAL_PORT << NetworkCommands::ExitGame;
+    netOperator.send(packet);
+    std::cout << "MessageSender::ExitGame\n";
+}
+
 void MessageSender::sendMouseClick(sf::Vector2f pos)
 {
     sf::Packet packet;

@@ -15,7 +15,8 @@ textureHolder.load(Textures::Amazon, "AmazonTexture.png");
 textureHolder.load(Textures::Paladin, "PaladinTexture.png");
 textureHolder.load(Textures::Landscape, "map2.png");
 
-
+textureHolderMenu.load(Textures::Button, "ButtonNormal.png");
+textureHolderMenu.load(Textures::ButtonPressed, "ButtonPressed.png");
 textureHolderMenu.load(Textures::LoginForm, "LoginForm.png");
 textureHolderMenu.load(Textures::ChooseForm, "CharsForm.png");
 textureHolderMenu.load(Textures::RegisterForm, "RegisterForm.png");

@@ -33,9 +33,10 @@ sf::Packet NetworkOperator::recieve()
 {
         sf::Packet packet;
 
+
         if(socket.receive(packet, ip, port) == sf::Socket::Done)
         {
-
+            std::cout << "ip = " << ip << "\n";
             return packet;
         }
 }

@@ -38,7 +38,7 @@ private:
     sf::Text boxText;
     sf::Vector2f position;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(boxSprite);
 

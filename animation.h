@@ -46,7 +46,7 @@ private:
 
     int width, height;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(mSprite, states);
     }

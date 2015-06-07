@@ -21,8 +21,9 @@ public:
     void exit();
     void close();
     void startNew();
-    Form* form;
     void initPlayer(EntityState::typeOfEntity id, sf::Vector2f position, EntityState::statsOfEntity stats);
+
+    FormManager formManager;
 
 private:
     Player player;
@@ -31,14 +32,9 @@ private:
     void update(sf::Time deltaTime);
     void processEvents();
 
-
-
-
 private:
 
     sf::String str;
-
-    FormManager formManager;
 
     sf::Time TimePerFrame = sf::seconds(1.f/60.f);
 

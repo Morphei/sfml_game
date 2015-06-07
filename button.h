@@ -30,7 +30,7 @@ public:
 private:
     bool visible = true;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     Forms::buttonID buttonID;
 
@@ -39,7 +39,9 @@ private:
 
     sf::Sprite currentSprite;
 
-    sf::String text;
+    sf::Text text;
+    sf::Vector2f txtPos;
+    sf::Vector2f txtPosPressed;
 
     sf::Vector2f position;
 

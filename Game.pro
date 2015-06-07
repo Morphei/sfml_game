@@ -60,3 +60,6 @@ HEADERS += \
     messagesender.h
 
 CONFIG += c++11
+
+CONFIG += link_pkgconfig
+PKGCONFIG += x11

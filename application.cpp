@@ -18,20 +18,19 @@ void Application::run()
 
             case States::Menu:
             {
-                Menu menu;
-                menuPointer = &menu;
-                player = menu.run();
-                //delete menuPointer;
+                menuPointer = new Menu;
+                menuPointer->run();
+//                delete menuPointer;
+                menuPointer = nullptr;
             }
             break;
 
             case States::Game:
             {
-                Game game(player);
-                gamePointer = &game;
-                game.run();
-                //game.mWorld.initPlayer();
-                //delete gamePointer;
+                gamePointer = new Game;
+                gamePointer->run();
+//                delete gamePointer;
+                gamePointer = nullptr;
             }
             break;
 

@@ -22,12 +22,11 @@ public:
     void setState(States::ID id);
     void runGame();
     void setPlayer(sf::Packet packet);
-    Menu* menuPointer;
-    Game* gamePointer;
+    Menu* menuPointer = nullptr;
+    Game* gamePointer = nullptr;
 
 private:
 
-    Player player;
     sf::Packet playerPacket;
     ResourceManager manager;
 };

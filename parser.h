@@ -8,7 +8,7 @@
 #include "application.h"
 #include "messagesender.h"
 #include "form.h"
-
+#include <X11/Xlib.h>
 
 
 //TODO - segfault after thread.terminate()

@@ -81,7 +81,9 @@ void Entity::unColourise()
 
 void Entity::setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun)
 {
+    std::cout << "Before sett texture\n";
     mAnimation.setTexture(id);
+    std::cout << "Texture is setted, setting size [Entity::setTexture]\n";
     mAnimation.setSize(sizeNorm, sizeAttack, sizeRun);
     std::cout << "setting texture&size to animation\n";
 }
@@ -119,6 +121,11 @@ void Entity::setType(EntityState::typeOfEntity enType)
 {
     type = enType;
     initializier.init(type, this);
+}
+
+EntityState::typeOfEntity Entity::getType()
+{
+    return type;
 }
 
 void Entity::setSpeed(int spd)

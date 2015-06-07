@@ -10,6 +10,8 @@ class MessageSender
 public:
     MessageSender();
 
+    void sendCreateNewChar(std::string nickname, EntityState::typeOfEntity type);
+    void exitGame();
     void sendMouseClick(sf::Vector2f pos);
     void inGame();
     void send(NetworkCommands::ID id, sf::Packet packet);

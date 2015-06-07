@@ -17,6 +17,8 @@ namespace Textures {
                        };
 
         enum ID_InMenu {
+                            Button,
+                            ButtonPressed,
                             MenuBackground,
                             LoginForm,
                             LoginButton,

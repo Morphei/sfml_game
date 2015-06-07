@@ -33,6 +33,7 @@ void EntityConfigurator::init(EntityState::typeOfEntity type, Entity *target)
 
     case EntityState::Paladin:
     {
+        std::cout << "Init paladin: " << "\n";
         //62x80 - Normal
         //168x116 - Attack
         //94x103 - Run

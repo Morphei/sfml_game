@@ -9,15 +9,38 @@ Button::Button(Forms::buttonID id, Textures::ID_InMenu up, Textures::ID_InMenu d
 {
     buttonID = id;
 
+    text.setFont(fontHolderMenu.get(Fonts::MainFont));
+    text.setString(caption);
+
     spriteNormal.setTexture(textureHolderMenu.get(up));
     spriteClicked.setTexture(textureHolderMenu.get(down));
-
-    text = caption;
 
     position = pos;
 
     spriteClicked.setPosition(position);
     spriteNormal.setPosition(position);
+
+    text.setCharacterSize(20);
+
+    text.setColor(sf::Color::Black);
+
+    sf::FloatRect bounds = text.getLocalBounds();
+    sf::FloatRect spriteBounds = spriteNormal.getLocalBounds();
+
+    spriteNormal.setOrigin(spriteBounds.width / 2.f, spriteBounds.height/ 2.f);
+    spriteClicked.setOrigin(spriteBounds.width / 2.f, spriteBounds.height/ 2.f);
+
+    spriteNormal.scale((bounds.width / spriteBounds.width) + 0.3 , 1.f);
+    spriteClicked.scale((bounds.width / spriteBounds.width) + 0.3 , 1.f);
+
+    text.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+    text.setPosition(position.x + spriteNormal.getOrigin().x, position.y + spriteNormal.getOrigin().y);
+
+    spriteNormal.setPosition(position.x + spriteNormal.getOrigin().x, position.y + spriteNormal.getOrigin().y + 5);
+    spriteClicked.setPosition(position.x + spriteNormal.getOrigin().x, position.y + spriteNormal.getOrigin().y + 5);
+
+    txtPos = text.getPosition();
+    txtPosPressed = sf::Vector2f(text.getPosition().x, text.getPosition().y+2);
 
     currentSprite = spriteNormal;
     isText = true;
@@ -43,6 +66,8 @@ bool Button::checkClick(sf::Vector2f mousePos)
 {
     if(currentSprite.getGlobalBounds().contains(mousePos.x, mousePos.y))
     {
+        text.setColor(sf::Color::Blue);
+        text.setPosition(txtPosPressed);
         currentSprite = spriteClicked;
         pressed = true;
         dt = toPressed;
@@ -66,15 +91,21 @@ void Button::update()
 
         if(dt == sf::Time::Zero)
         {
+            currentSprite = spriteNormal;
+            text.setColor(sf::Color::Black);
+            text.setPosition(txtPos);
             pressed = false;
         }
     }
     else
-        currentSprite = spriteNormal;
+    {
+
+    }
 }
 
 void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     if(visible)
     target.draw(currentSprite);
+    target.draw(text);
 }

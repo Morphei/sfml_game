@@ -2,10 +2,9 @@
 #include <iostream>
 
 
-Game::Game(Player player): mWindow(sf::VideoMode(640, 480), "Arms Race"/*, sf::Style::Fullscreen*/)
+Game::Game(): mWindow(sf::VideoMode(1366, 768), "Arms Race", sf::Style::Fullscreen)
 {
     mWindow.setVerticalSyncEnabled(true);
-//    mWorld.initPlayer(player);
 }
 
 
@@ -13,6 +12,7 @@ void Game::run()
 {
     sender.inGame();
     isRunning = true;
+
     sf::Clock mainClock;
     mainClock.restart();
 
@@ -66,8 +66,10 @@ void Game::processEvents()
             {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
+                    sender.exitGame();
                     gameState = States::Menu;
-                    mWindow.close();
+//                    mWindow.close();
+                    exit();
                 }
             }
 
@@ -91,4 +93,9 @@ void Game::render()
 bool Game::started()
 {
     return isRunning;
+}
+
+void Game::exit()
+{
+    mWindow.close();
 }

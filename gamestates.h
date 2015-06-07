@@ -11,7 +11,8 @@ namespace NetworkCommands{
                 DeleteChar,
                 InGame,
                 AddEnemy,
-                MouseClick
+                MouseClick,
+                ExitGame
                 };
     }
 
@@ -45,7 +46,9 @@ namespace Forms {
         Exit,
         Play,
         New_Char,
-        Cancel
+        Delete_char,
+        Cancel,
+        CreateNew
     };
 
     enum textBoxID{
