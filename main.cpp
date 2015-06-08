@@ -6,7 +6,9 @@
 
 int main()
 {
+
 XInitThreads();
+
 Parser parser;
 
 parser.run();

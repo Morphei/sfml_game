@@ -5,14 +5,6 @@
 #include "resourcemanager.h"
 #include "gamestates.h"
 
-//  TODO List
-//
-//          Додати конструктор, що вміщає текст кнопки:
-//  1. Завантаження шрифта
-//  2. Створення sf::Text
-//  3. Розміщення його по центру кнопки
-//  4. Метод Draw замість getCurrentSprite();
-
 class Button : public sf::Drawable
 {
 public:

@@ -75,12 +75,15 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
         {
             form->createForm(Forms::ID::CreateNewChar, Textures::ChooseForm, position);
 
-            form->addButton(Forms::buttonID::CreateNew, "Create Char", sf::Vector2f(10, 200), Textures::Button, Textures::ButtonPressed);
-            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(120, 200), Fonts::MainFont, false);
+            form->addButton(Forms::buttonID::CreateNew, "Create Char", sf::Vector2f(250, 200), Textures::Button, Textures::ButtonPressed);
+            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(40, 200), Fonts::MainFont, false);
+
+            form->addLabel(sf::Vector2f(40, 170), "Enter your nickname", Fonts::MainFont);
 
             form->createChars();
-            form->manager.addEnemy(EntityState::Amazon, "Amazon", sf::Vector2f(120,200));
-            form->manager.addEnemy(EntityState::Paladin, "Paladin", sf::Vector2f(220,200));
+
+            form->manager.addEnemy(EntityState::Amazon, "Amazon", sf::Vector2f(position.x + 100, position.y + 160));
+            form->manager.addEnemy(EntityState::Paladin, "Paladin", sf::Vector2f(position.x + 200, position.y + 160));
 
             form->isCreated();
 
@@ -123,7 +126,7 @@ void FormManager::checkClick(sf::Vector2f mousePos)
 
                 case Forms::buttonID::New_Char:
                 {
-                    createForm(Forms::ID::CreateNewChar, sf::Vector2f(500,500));
+                    createForm(Forms::ID::CreateNewChar, sf::Vector2f(100, 100));
                 }
 
                     break;

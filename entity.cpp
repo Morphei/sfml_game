@@ -37,6 +37,18 @@ void Entity::update(sf::Time deltaTime)
 void Entity::setName(std::string name)
 {
     nickname = name;
+    nicknameToDraw.setString(nickname);
+//    if(state == States::Menu)
+//    nicknameToDraw.setFontMenu(fontHolder.get(Fonts::MainFont));
+//    else if (state == States::Game)
+    nicknameToDraw.setFont(fontHolderMenu.get(Fonts::MainFont));
+    nicknameToDraw.setCharacterSize(20);
+    sf::FloatRect bounds = nicknameToDraw.getLocalBounds();
+    nicknameToDraw.setOrigin(bounds.width / 2.f, bounds.height);
+    nicknameToDraw.setPosition(mPosition.x, mPosition.y - mAnimation.getSprite()->getGlobalBounds().height * 1.1);
+
+
+    //nicknameToDraw.setPosition();
 }
 
 std::string Entity::getName()

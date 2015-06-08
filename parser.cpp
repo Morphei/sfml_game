@@ -117,6 +117,7 @@ void Parser::recieve()
 
             case NetworkCommands::SendChoosenChar:
             {
+
                 unsigned short type;
                 packet >> type;
 

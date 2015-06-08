@@ -34,9 +34,9 @@ EntityState::typeOfEntity EntityManager::getSelectedEnemyType()
 void EntityManager::addEnemy(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos)
 {
     Enemy enemy;
-    enemy.setName(nickname);
     enemy.setType(type);
     enemy.setPosition(pos);
+    enemy.setName(nickname);
     enemies.push_back(enemy);
 }
 

@@ -54,11 +54,10 @@ protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(mAnimation, states);
+        target.draw(nicknameToDraw);
     }
 
     int mSpeed;
-
-//    sf::Texture entityNormal, entityRun;
 
     EntityConfigurator initializier;
 
@@ -71,6 +70,8 @@ protected:
     sf::Vector2f mVelocity;
 
     sf::Vector2f mPosition;
+
+    sf::Text nicknameToDraw;
 
     EntityState::typeOfEntity type;
 
