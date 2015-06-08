@@ -10,6 +10,7 @@ class MessageSender
 public:
     MessageSender();
 
+    void sendCharToDelete(std::string nickname, EntityState::typeOfEntity type);
     void sendCreateNewChar(std::string nickname, EntityState::typeOfEntity type);
     void exitGame();
     void sendMouseClick(sf::Vector2f pos);

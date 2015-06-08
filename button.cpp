@@ -9,7 +9,7 @@ Button::Button(Forms::buttonID id, Textures::ID_InMenu up, Textures::ID_InMenu d
 {
     buttonID = id;
 
-    text.setFont(fontHolderMenu.get(Fonts::MainFont));
+    text.setFont(fontHolderMenu.get(Fonts::MainFontMenu));
     text.setString(caption);
 
     spriteNormal.setTexture(textureHolderMenu.get(up));
@@ -66,12 +66,15 @@ bool Button::checkClick(sf::Vector2f mousePos)
 {
     if(currentSprite.getGlobalBounds().contains(mousePos.x, mousePos.y))
     {
+        if(!pressed)
+        {
         text.setColor(sf::Color::Blue);
         text.setPosition(txtPosPressed);
         currentSprite = spriteClicked;
         pressed = true;
         dt = toPressed;
         return true;
+        }
     }
     else
         return false;

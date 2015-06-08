@@ -5,6 +5,14 @@ MessageSender::MessageSender()
 {
 }
 
+void MessageSender::sendCharToDelete(std::string nickname, EntityState::typeOfEntity type)
+{
+    sf::Packet packet;
+    packet << MARK << LOCAL_PORT << NetworkCommands::DeleteChar << nickname << type;
+    netOperator.send(packet);
+    std::cout << "MessageSender::Deleting\n";
+}
+
 void MessageSender::sendCreateNewChar(std::string nickname, EntityState::typeOfEntity type)
 {
     sf::Packet packet;

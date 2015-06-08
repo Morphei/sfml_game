@@ -17,6 +17,8 @@ void Entity::update(sf::Time deltaTime)
                     mPosition.x += ((targetCoordinates.x - mPosition.x)/distanceToTarget) * mSpeed * deltaTime.asSeconds();
                     mPosition.y += ((targetCoordinates.y - mPosition.y)/distanceToTarget) * mSpeed * deltaTime.asSeconds();
 
+                    nicknameToDraw.setPosition(mPosition.x, mPosition.y - mAnimation.getSprite()->getGlobalBounds().height * 1.1);
+
                     mAnimation.setPosition(mPosition);
                     mAnimation.update(deltaTime);
 
@@ -38,17 +40,18 @@ void Entity::setName(std::string name)
 {
     nickname = name;
     nicknameToDraw.setString(nickname);
-//    if(state == States::Menu)
-//    nicknameToDraw.setFontMenu(fontHolder.get(Fonts::MainFont));
-//    else if (state == States::Game)
-    nicknameToDraw.setFont(fontHolderMenu.get(Fonts::MainFont));
+
+//    if(gameState == States::Menu)
+//    nicknameToDraw.setFont(fontHolderMenu.get(Fonts::MainFontMenu));
+
+//    if (gameState == States::Game)
+    nicknameToDraw.setFont(fontHolder.get(Fonts::MainFontGame));
+
     nicknameToDraw.setCharacterSize(20);
     sf::FloatRect bounds = nicknameToDraw.getLocalBounds();
     nicknameToDraw.setOrigin(bounds.width / 2.f, bounds.height);
     nicknameToDraw.setPosition(mPosition.x, mPosition.y - mAnimation.getSprite()->getGlobalBounds().height * 1.1);
-
-
-    //nicknameToDraw.setPosition();
+    std::cout << "Name is setting [" << nickname << "] at " << nicknameToDraw.getPosition().x << ":" << nicknameToDraw.getPosition().y << "\n";
 }
 
 std::string Entity::getName()

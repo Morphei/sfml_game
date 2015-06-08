@@ -30,9 +30,9 @@ void World::initPlayer(Player player)
     entities.initPlayer(player);
 }
 
-void World::initPlayer(EntityState::typeOfEntity id, sf::Vector2f position, EntityState::statsOfEntity stats)
+void World::initPlayer(EntityState::typeOfEntity id, std::string nick, sf::Vector2f position, EntityState::statsOfEntity stats)
 {
-    entities.initPlayer(id, position, stats);
+    entities.initPlayer(id, nick, position, stats);
 }
 
 void World::initMap(Textures::ID_InGame id)

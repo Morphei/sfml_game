@@ -79,6 +79,7 @@ void Menu::processEvents()
             if(event.type == sf::Event::Closed)
             {
                 gameState = States::Close;
+
                 mWindow.close();
             }
 

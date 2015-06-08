@@ -24,7 +24,7 @@ public:
 
     void initPlayer(Player pl);
 
-    void initPlayer(EntityState::typeOfEntity type, sf::Vector2f pos, EntityState::statsOfEntity stats);
+    void initPlayer(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos, EntityState::statsOfEntity stats);
 
     void movePlayer(sf::Vector2f target);
 

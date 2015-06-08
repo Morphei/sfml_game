@@ -12,6 +12,7 @@ void Parser::run()
     netOperator->bind();
     startRecieve();
     application.run();
+    messenger.exitGame();
     netOperator->unbind();
     stop();
 }
@@ -73,15 +74,8 @@ void Parser::recieve()
                     for(int i = 0; i < count; i++)
                     {
                         packet >> nickname;
-                        std::cout << "Nickname: " << nickname << "\n";
-
-                        mutex.lock();
-                        application.menuPointer->formManager.form->addLabel(sf::Vector2f(i*120+10, 100), nickname, Fonts::MainFont);
-                        mutex.unlock();
-
-                        std::cout << nickname << " - ";
-
                         packet >> type;
+
                         id = static_cast<EntityState::typeOfEntity>(type);
                         std::cout << id << std::endl;
 
@@ -119,9 +113,15 @@ void Parser::recieve()
             {
 
                 unsigned short type;
-                packet >> type;
+
+                std::string nickname;
 
                 sf::Vector2f position;
+
+                packet >> nickname;
+
+                packet >> type;
+
                 packet >> position.x;
                 packet >> position.y;
 
@@ -130,11 +130,12 @@ void Parser::recieve()
 
                 std::cout << "Init player [parser.cpp]\n";
 
+                std::cout << "Nickname:  " << nickname << "\n";
                 while(application.gamePointer == nullptr)
                 {
 
                 }
-                application.gamePointer->mWorld.initPlayer(static_cast<EntityState::typeOfEntity>(type), position, stats);
+                application.gamePointer->mWorld.initPlayer(static_cast<EntityState::typeOfEntity>(type), nickname, position, stats);
             }
             break;
 
@@ -143,8 +144,11 @@ void Parser::recieve()
                 std::cout << "Add enemy\n";
                 std::string nick;
                 packet >> nick;
+                std::cout << "Enemy nick: " << nick;
                 unsigned short type;
                 packet >> type;
+
+                std::cout << " type: " << type << "\n";
                 sf::Vector2f pos;
                 packet >> pos.x;
                 packet >> pos.y;
@@ -163,12 +167,20 @@ void Parser::recieve()
             }
                 break;
 
+            case NetworkCommands::DeleteChar:
+            {
+            }
+                break;
+
             case NetworkCommands::NewChar:
             {
                 bool isCreate;
                 packet >> isCreate;
                 if(isCreate)
+                {
+
                     messenger.requestListOfUsers();
+                }
             }
                 break;
             default:

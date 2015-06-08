@@ -16,11 +16,11 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
             form->createForm(id, Textures::LoginForm, position);
             form->setCaption("Login");
 
-            form->addLabel(sf::Vector2f(20, 70), "Login", Fonts::MainFont);
-            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(20, 110), Fonts::MainFont, false);
+            form->addLabel(sf::Vector2f(20, 70), "Login", Fonts::MainFontMenu);
+            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(20, 110), Fonts::MainFontMenu, false);
 
-            form->addLabel(sf::Vector2f(20, 150), "Password", Fonts::MainFont);
-            form->addTextBox(Forms::textBoxID::PasswordTextBox, sf::Vector2f(20, 190), Fonts::MainFont, true);
+            form->addLabel(sf::Vector2f(20, 150), "Password", Fonts::MainFontMenu);
+            form->addTextBox(Forms::textBoxID::PasswordTextBox, sf::Vector2f(20, 190), Fonts::MainFontMenu, true);
 
 
             form->addButton(Forms::buttonID::Login, "Login" ,sf::Vector2f(10,250), Textures::Button, Textures::ButtonPressed);
@@ -38,11 +38,11 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
             form->createForm(Forms::ID::RegisterForm, Textures::RegisterForm, position);
             form->setCaption("New Player");
 
-            form->addLabel(sf::Vector2f(20, 70), "Login", Fonts::MainFont);
-            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(20, 110), Fonts::MainFont, false);
+            form->addLabel(sf::Vector2f(20, 70), "Login", Fonts::MainFontMenu);
+            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(20, 110), Fonts::MainFontMenu, false);
 
-            form->addLabel(sf::Vector2f(20, 170), "Password", Fonts::MainFont);
-            form->addTextBox(Forms::textBoxID::PasswordTextBox, sf::Vector2f(20, 210), Fonts::MainFont, true);
+            form->addLabel(sf::Vector2f(20, 170), "Password", Fonts::MainFontMenu);
+            form->addTextBox(Forms::textBoxID::PasswordTextBox, sf::Vector2f(20, 210), Fonts::MainFontMenu, true);
 
             form->isCreated();
         }
@@ -54,8 +54,8 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
 
             form->createForm(Forms::ID::ChooseCharacters ,Textures::ChooseForm, position);
 
-
             form->createChars();
+
             std::cout << "Exit Formmanager::create chars to ChCharForm\n";
             form->addButton(Forms::buttonID::Play, "Play", sf::Vector2f(10, 200), Textures::Button, Textures::ButtonPressed);
             std::cout << "pushed play button\n";
@@ -76,9 +76,9 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
             form->createForm(Forms::ID::CreateNewChar, Textures::ChooseForm, position);
 
             form->addButton(Forms::buttonID::CreateNew, "Create Char", sf::Vector2f(250, 200), Textures::Button, Textures::ButtonPressed);
-            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(40, 200), Fonts::MainFont, false);
+            form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(40, 200), Fonts::MainFontMenu, false);
 
-            form->addLabel(sf::Vector2f(40, 170), "Enter your nickname", Fonts::MainFont);
+            form->addLabel(sf::Vector2f(40, 170), "Enter your nickname", Fonts::MainFontMenu);
 
             form->createChars();
 
@@ -141,6 +141,18 @@ void FormManager::checkClick(sf::Vector2f mousePos)
                     sender.sendCreateNewChar(nickname, type);
 
 
+                }
+                    break;
+
+                case Forms::buttonID::Delete_char:
+                {
+                    std::string nickname = form->manager.getSeectedEnemy();
+                    EntityState::typeOfEntity type = form->manager.getSelectedEnemyType();
+
+                    std::cout << "Nick to delete: " << nickname << "-----------------------------\n";
+
+                    sender.sendCharToDelete(nickname, type);
+//                    sender.requestListOfUsers();
                 }
                     break;
 

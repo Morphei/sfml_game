@@ -21,9 +21,7 @@ void EntityConfigurator::init(EntityState::typeOfEntity type, Entity *target)
             target->setState(EntityState::Normal, EntityState::direction::DownLeftDown);
             std::cout << "setState\n";
             target->setSpeed(200);
-//            target->setPosition(200,200);
             std::cout << "Exit init EntityConfig\n";
-
     }
         break;
 
@@ -40,8 +38,6 @@ void EntityConfigurator::init(EntityState::typeOfEntity type, Entity *target)
         target->setTexture(Textures::Paladin, sf::Vector2i(62,80), sf::Vector2i(168,116), sf::Vector2i(94,103));
         target->setState(EntityState::Normal, EntityState::DownLeftDown);
         target->setSpeed(200);
-//        target->setPosition(200,200);
-
     }
         break;
 

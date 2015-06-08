@@ -38,11 +38,11 @@ namespace Textures {
 
 namespace Fonts {
         enum ID_InGame {
-
+                            MainFontGame
                        };
 
         enum ID_InMenu {
-                            MainFont
+                            MainFontMenu
                        };
     }
 

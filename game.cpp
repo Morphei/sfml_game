@@ -5,6 +5,8 @@
 Game::Game(): mWindow(sf::VideoMode(1366, 768), "Arms Race", sf::Style::Fullscreen)
 {
     mWindow.setVerticalSyncEnabled(true);
+    EntityState::statsOfEntity st;
+    mWorld.initPlayer(EntityState::typeOfEntity::Amazon, "Test", sf::Vector2f(100,100), st);
 }
 
 
@@ -47,6 +49,7 @@ void Game::processEvents()
         {
             if(event.type == sf::Event::Closed)
             {
+                sender.exitGame();
                 mWindow.close();
                 gameState = States::Menu;
             }
@@ -66,7 +69,6 @@ void Game::processEvents()
             {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
-                    sender.exitGame();
                     gameState = States::Menu;
 //                    mWindow.close();
                     exit();

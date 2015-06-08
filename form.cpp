@@ -86,7 +86,7 @@ std::string Form::getTextBoxText(Forms::textBoxID id)
 void Form::createChars()
 {
     EntityState::statsOfEntity stat;
-    manager.initPlayer(EntityState::typeOfEntity::Amazon, sf::Vector2f(0,0), stat);
+    manager.initPlayer(EntityState::typeOfEntity::Amazon, "", sf::Vector2f(0,0), stat);
     std::cout << "Form::createChars()\n";
 }
 

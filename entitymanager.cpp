@@ -56,7 +56,7 @@ void EntityManager::initPlayer(Player pl)
     mPlayer = pl;
 }
 
-void EntityManager::initPlayer(EntityState::typeOfEntity type, sf::Vector2f pos, EntityState::statsOfEntity stats)
+void EntityManager::initPlayer(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos, EntityState::statsOfEntity stats)
 {
     std::cout << "Setting type of player\n";
     mPlayer.setType(type);
@@ -64,7 +64,9 @@ void EntityManager::initPlayer(EntityState::typeOfEntity type, sf::Vector2f pos,
     mPlayer.setPosition(pos);
     std::cout << "Setting stats\n";
     mPlayer.setStats(stats);
-    std::cout << "Exit init player\n";
+    mPlayer.setName(nickname);
+    std::cout << "Exit init player///////\n";
+    std::cout << "\n";
 }
 
 void EntityManager::movePlayer(sf::Vector2f target)
