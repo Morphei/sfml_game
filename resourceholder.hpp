@@ -13,7 +13,8 @@ namespace Textures {
         enum ID_InGame {
                             Landscape,
                             Amazon,
-                            Paladin
+                            Paladin,
+                            Wall
                        };
 
         enum ID_InMenu {

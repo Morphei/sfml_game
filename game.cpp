@@ -6,7 +6,7 @@ Game::Game(): mWindow(sf::VideoMode(1366, 768), "Arms Race", sf::Style::Fullscre
 {
     mWindow.setVerticalSyncEnabled(true);
     EntityState::statsOfEntity st;
-    mWorld.initPlayer(EntityState::typeOfEntity::Amazon, "Test", sf::Vector2f(100,100), st);
+    mWorld.initPlayer(EntityState::typeOfEntity::Amazon, "Test", sf::Vector2f(3200,1050), st);
 }
 
 
