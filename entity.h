@@ -7,15 +7,17 @@
 #include "animation.h"
 
 #include "entityconfigurator.h"
+#include "object.h"
 
 const float PI = 3.14159265;
 
-class Entity : public sf::Drawable
+class Entity : public Object
 {
 
 public:
 
     Entity();
+
     virtual void update(sf::Time deltaTime);
 
     virtual void setName(std::string name);
@@ -48,10 +50,10 @@ public:
 
     virtual void unColourise();
 
-protected:
+//protected:
     std::string nickname;
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(mAnimation, states);
         target.draw(nicknameToDraw);

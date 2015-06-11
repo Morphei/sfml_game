@@ -12,8 +12,8 @@ void Parser::run()
     netOperator->bind();
     startRecieve();
     application.run();
-    messenger.exitGame();
     netOperator->unbind();
+    messenger.exitGame();
     stop();
 }
 

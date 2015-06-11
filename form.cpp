@@ -24,6 +24,8 @@ void Form::close()
         (*i)->clear();
     textBoxes.clear();
     labels.clear();
+    isClosed = false;
+    isExist = false;
 
 }
 
@@ -87,48 +89,39 @@ void Form::createChars()
 {
     EntityState::statsOfEntity stat;
     manager.initPlayer(EntityState::typeOfEntity::Amazon, "", sf::Vector2f(0,0), stat);
-    std::cout << "Form::createChars()\n";
 }
 
 void Form::addChars(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f position)
 {
-    std::cout << "Form::addChar()\n";
     manager.addEnemy(type, nickname, pos + position);
 }
 
 void Form::addTextBox(Forms::textBoxID boxName ,sf::Vector2f position, Fonts::ID_InMenu id, bool enableMask)
 {
-    std::cout << "Enter Form::add TextBox\n";
     TextBox* box = new TextBox;
 
     box->init(boxName ,pos + position, id);
     box->enableMask(enableMask);
 //    isExist = true;
     textBoxes.push_back(box);
-    std::cout << "add addTextBox\n";
 }
 
 
 
 void Form::addLabel(sf::Vector2f position, std::string text, Fonts::ID_InMenu fontID)
 {
-    std::cout << "Enter Form::add Label\n";
     sf::Text* label = new sf::Text;
     label->setCharacterSize(20);
     label->setFont(fontHolderMenu.get(fontID));
     label->setString(text);
     label->setPosition(position + pos);
     labels.push_back(label);
-    std::cout << "add Label\n";
 }
 
 void Form::addButton(Forms::buttonID id, std::string caption, sf::Vector2f position, Textures::ID_InMenu texture_normal, Textures::ID_InMenu texture_pressed)
 {
-    std::cout << "Before new Button in Form::addButton\n";
     Button* button = new Button(id, texture_normal, texture_pressed, caption, position + pos);
-    std::cout << "Pusging button to buttons\n";
     buttons.push_back(button);
-    std::cout << "pushed\n";
 
 }
 

@@ -20,7 +20,6 @@ void Application::run()
             {
                 menuPointer = new Menu;
                 menuPointer->run();
-//                delete menuPointer;
                 menuPointer = nullptr;
             }
             break;
@@ -29,7 +28,6 @@ void Application::run()
             {
                 gamePointer = new Game;
                 gamePointer->run();
-//                delete gamePointer;
                 gamePointer = nullptr;
             }
             break;

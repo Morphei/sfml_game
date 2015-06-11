@@ -69,8 +69,9 @@ void Game::processEvents()
             {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 {
+                    sender.exitGame();
                     gameState = States::Menu;
-//                    mWindow.close();
+                    mWindow.close();
                     exit();
                 }
             }
@@ -99,5 +100,6 @@ bool Game::started()
 
 void Game::exit()
 {
+    isRunning = false;
     mWindow.close();
 }

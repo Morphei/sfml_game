@@ -25,7 +25,7 @@ void NetworkOperator::send(sf::Packet packet)
 
     sf::UdpSocket sendSocket;
 
-    sendSocket.send(packet, SERVER_IP, SERVER_PORT);
+    sendSocket.send(packet, sf::IpAddress::Broadcast, SERVER_PORT);
 
 }
 

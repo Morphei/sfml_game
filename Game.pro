@@ -33,7 +33,8 @@ SOURCES += main.cpp \
     form.cpp \
     textbox.cpp \
     formmanager.cpp \
-    messagesender.cpp
+    messagesender.cpp \
+    object.cpp
 
 HEADERS += \
     menu.h \
@@ -57,7 +58,8 @@ HEADERS += \
     form.h \
     textbox.h \
     formmanager.h \
-    messagesender.h
+    messagesender.h \
+    object.h
 
 CONFIG += c++11
 

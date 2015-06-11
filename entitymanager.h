@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
+#include "object.h"
 #include "enemy.h"
 #include "player.h"
 
@@ -31,7 +32,17 @@ public:
     void update(sf::Time deltaTime);
 
 private:
+    int countOfObjects = 0;
+
     std::vector<Enemy> enemies;
+    std::vector<Object> objects;
+
+    struct objectSprite{
+        sf::Sprite* sprite;
+        int ID;
+    };
+
+    std::multimap<float, objectSprite> spritesToDraw;
 
     std::string selectedEnemy;
 

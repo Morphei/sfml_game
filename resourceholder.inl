@@ -1,3 +1,5 @@
+#include "resourceholder.hpp"
+
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename)
 {
@@ -7,6 +9,8 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
         throw std::runtime_error("ResourceHolder::load - Failed to load " + path + filename);
 
     // If loading successful, insert resource to map
+//    if(id == Textures::ID_InGame)
+//        resource.setSmooth(true);
     insertResource(id, std::move(resource));
 }
 

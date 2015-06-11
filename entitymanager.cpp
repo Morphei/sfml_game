@@ -37,7 +37,14 @@ void EntityManager::addEnemy(EntityState::typeOfEntity type, std::string nicknam
     enemy.setType(type);
     enemy.setPosition(pos);
     enemy.setName(nickname);
+    enemy.setID(countOfObjects);
+    countOfObjects++;
     enemies.push_back(enemy);
+
+    objectSprite oSprite;
+    oSprite.ID = enemy.getId();
+    oSprite.sprite = enemy.getSprite();
+    spritesToDraw.insert(std::pair<float, objectSprite>(enemy.getPosition().y, oSprite));
 }
 
 void EntityManager::moveEnemy(std::string nick, sf::Vector2f target)
@@ -67,6 +74,13 @@ void EntityManager::initPlayer(EntityState::typeOfEntity type, std::string nickn
     mPlayer.setName(nickname);
     std::cout << "Exit init player///////\n";
     std::cout << "\n";
+    mPlayer.setID(countOfObjects);
+    countOfObjects++;
+
+    objectSprite oSprite;
+    oSprite.ID = mPlayer.getId();
+    oSprite.sprite = mPlayer.getSprite();
+    spritesToDraw.insert(std::pair<float, objectSprite>(mPlayer.getPosition().y, oSprite));
 }
 
 void EntityManager::movePlayer(sf::Vector2f target)
@@ -92,29 +106,34 @@ void EntityManager::update(sf::Time deltaTime)
 void EntityManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 
-        auto itr = enemies.begin();
+    for(auto itr = spritesToDraw.begin(); itr != spritesToDraw.end(); itr++)
+    {
+        target.draw(*(*itr).second.sprite);
+    }
 
-        while(itr!= enemies.end())
-        {
-            if((*itr).getPosition().y < mPlayer.getPosition().y)
-            {
-            target.draw((*itr));
-            }
+//        auto itr = enemies.begin();
 
-            itr++;
+//        while(itr!= enemies.end())
+//        {
+//            if((*itr).getPosition().y < mPlayer.getPosition().y)
+//            {
+//            target.draw((*itr));
+//            }
 
-        }
+//            itr++;
 
-        itr = enemies.begin();
-        target.draw(mPlayer);
+//        }
 
-        while(itr!= enemies.end())
-        {
-            if((*itr).getPosition().y > mPlayer.getPosition().y)
-            {
-            target.draw((*itr));
-            }
-            itr++;
-        }
+//        itr = enemies.begin();
+//        target.draw(mPlayer);
+
+//        while(itr!= enemies.end())
+//        {
+//            if((*itr).getPosition().y > mPlayer.getPosition().y)
+//            {
+//            target.draw((*itr));
+//            }
+//            itr++;
+//        }
 
 }

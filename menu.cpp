@@ -107,6 +107,7 @@ void Menu::processEvents()
 
                                     case Forms::buttonID::Exit:
                                             exit();
+                                            close();
                                         break;
 
                                 }
@@ -118,6 +119,9 @@ void Menu::processEvents()
 
             if(event.type == sf::Event::TextEntered)
                 formManager.processEvents(event);
+
+            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+                exit();
 
         }
 

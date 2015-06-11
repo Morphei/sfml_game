@@ -99,7 +99,6 @@ void FormManager::checkClick(sf::Vector2f mousePos)
                 switch (id) {
                 case Forms::buttonID::Login:
                     {
-
                         std::string login, pass;
                         login = form->getTextBoxText(Forms::textBoxID::LoginTextBox);
                         pass = form->getTextBoxText(Forms::textBoxID::PasswordTextBox);
@@ -135,12 +134,7 @@ void FormManager::checkClick(sf::Vector2f mousePos)
                 {
                     std::string nickname = form->getTextBoxText(Forms::textBoxID::LoginTextBox);
                     EntityState::typeOfEntity type = form->manager.getSelectedEnemyType();
-
-                    std::cout << "Nick: " << nickname << " Type: " << type << "\n";
-
                     sender.sendCreateNewChar(nickname, type);
-
-
                 }
                     break;
 
@@ -149,10 +143,7 @@ void FormManager::checkClick(sf::Vector2f mousePos)
                     std::string nickname = form->manager.getSeectedEnemy();
                     EntityState::typeOfEntity type = form->manager.getSelectedEnemyType();
 
-                    std::cout << "Nick to delete: " << nickname << "-----------------------------\n";
-
                     sender.sendCharToDelete(nickname, type);
-//                    sender.requestListOfUsers();
                 }
                     break;
 
@@ -180,6 +171,7 @@ void FormManager::processEvents(sf::Event event)
 
 void FormManager::close()
 {
-    delete form;
+    form->close();
+//    delete form;
 }
 
