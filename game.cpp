@@ -6,6 +6,8 @@ Game::Game(): mWindow(sf::VideoMode(1366, 768), "Arms Race", sf::Style::Fullscre
 {
     mWindow.setVerticalSyncEnabled(true);
     EntityState::statsOfEntity st;
+    st.hitPoints = 100;
+    st.manaPoints = 100;
     mWorld.initPlayer(EntityState::typeOfEntity::Amazon, "Test", sf::Vector2f(3200,1050), st);
 }
 
@@ -35,7 +37,7 @@ void Game::run()
     }
 }
 
-void Game::init(Player pl)
+void Game::init(Player* pl)
 {
     mWorld.initPlayer(pl);
 }

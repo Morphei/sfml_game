@@ -17,7 +17,7 @@ public:
 
     void addEnemy(std::string nick, EntityState::typeOfEntity type, sf::Vector2f pos);
     void moveEnemy(std::string nick, sf::Vector2f target);
-    void initPlayer(Player player);
+    void initPlayer(Player *player);
     void initPlayer(EntityState::typeOfEntity id, std::string nick, sf::Vector2f position, EntityState::statsOfEntity stats);
     void initMap(Textures::ID_InGame id);
 

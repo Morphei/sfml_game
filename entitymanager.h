@@ -7,6 +7,8 @@
 #include "object.h"
 #include "enemy.h"
 #include "player.h"
+#include "headupdisplay.h"
+#include "objectconstructor.h"
 
 class EntityManager : public sf::Drawable
 {
@@ -23,7 +25,7 @@ public:
 
     void moveEnemy(std::string nick, sf::Vector2f target);
 
-    void initPlayer(Player pl);
+    void initPlayer(Player *pl);
 
     void initPlayer(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos, EntityState::statsOfEntity stats);
 
@@ -34,22 +36,27 @@ public:
 private:
     int countOfObjects = 0;
 
-    std::vector<Enemy> enemies;
-    std::vector<Object> objects;
+    HeadUpDisplay hud;
+    ObjectConstructor* constructor;
+
+
+    std::vector<Enemy*> enemies;
+    std::vector<Object*> objects;
+
+    Player* mPlayer = nullptr;
 
     struct objectSprite{
         sf::Sprite* sprite;
         int ID;
     };
 
-    std::multimap<float, objectSprite> spritesToDraw;
+    sf::View playerView;
 
-    std::string selectedEnemy;
+    std::multimap<float, objectSprite*> spritesToDraw;
+
+    std::string selectedEnemy = "";
 
     EntityState::typeOfEntity selectedEnemyType;
-
-    Player mPlayer;
-
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

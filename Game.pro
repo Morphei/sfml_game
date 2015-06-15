@@ -34,7 +34,9 @@ SOURCES += main.cpp \
     textbox.cpp \
     formmanager.cpp \
     messagesender.cpp \
-    object.cpp
+    object.cpp \
+    headupdisplay.cpp \
+    objectconstructor.cpp
 
 HEADERS += \
     menu.h \
@@ -59,7 +61,9 @@ HEADERS += \
     textbox.h \
     formmanager.h \
     messagesender.h \
-    object.h
+    object.h \
+    headupdisplay.h \
+    objectconstructor.h
 
 CONFIG += c++11
 

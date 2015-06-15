@@ -42,7 +42,7 @@ private:
 
     sf::Vector2i currentSprite;
 
-    int timeToChangeSprite = 10;
+    int timeToChangeSprite = 100;
 
     int width, height;
 

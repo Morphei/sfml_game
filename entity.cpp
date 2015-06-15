@@ -21,7 +21,7 @@ void Entity::update(sf::Time deltaTime)
 
                     mAnimation.setPosition(mPosition);
                     mAnimation.update(deltaTime);
-
+                    std::cout << "Position: " << mPosition.x << " " << mPosition.y << "\n";
                     }
 
                 else
@@ -72,9 +72,9 @@ void Entity::setPosition(float vx, float vy)
     mAnimation.setPosition(mPosition);
 }
 
-void Entity::setStats(EntityState::statsOfEntity stats)
+void Entity::setStats(EntityState::statsOfEntity st)
 {
-    statsOfEntity = stats;
+    stats = st;
 }
 
 sf::Vector2f Entity::getPosition() const
@@ -92,6 +92,16 @@ void Entity::unColourise()
 {
     sf::Sprite* sprite = mAnimation.getSprite();
     sprite->setColor(sf::Color::White);
+}
+
+sf::Sprite* Entity::getSprite()
+{
+    return mAnimation.getSprite();
+}
+
+EntityState::statsOfEntity Entity::getStats()
+{
+    return stats;
 }
 
 void Entity::setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun)
@@ -117,7 +127,7 @@ void Entity::move(sf::Vector2f target)
     float dx = targetCoordinates.x - mPosition.x;
     float dy = targetCoordinates.y - mPosition.y;
     float rotation = (atan2(dy, dx) + PI) * 180 / PI;
-    int direct = rotation/22.5;
+    int direct = rotation/22.4;
 
     dir = static_cast<EntityState::direction>(direct);
 

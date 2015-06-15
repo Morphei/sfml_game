@@ -7,7 +7,7 @@
 #include <iostream>
 
 
-const int HEIGHT_MAP = 100;
+const int HEIGHT_MAP = 50;
 const int WIDTH_MAP = 50;
 
 //          TODO List
@@ -29,12 +29,6 @@ private:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    sf::Vector2f downRight = sf::Vector2f(80,39);
-    sf::Vector2f downLeft = sf::Vector2f(-80,43);
-    sf::Vector2f UpLeft = sf::Vector2f(-80,-39);
-    sf::Vector2f UpRight = sf::Vector2f(80,-43);
-
-    std::vector<sf::Vector2f> vectors;
 
     void drawWallRect(sf::RenderWindow *target, sf::Vector2f at, sf::FloatRect viewRect);
     sf::CircleShape shape;

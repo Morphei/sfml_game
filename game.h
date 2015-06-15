@@ -42,7 +42,7 @@ public:
     World mWorld;
 
 private:
-    void        init(Player pl);
+    void        init(Player *pl);
     void        processEvents();
     void        update(sf::Time deltaTime);
     void        render();

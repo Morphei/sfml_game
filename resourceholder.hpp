@@ -14,7 +14,8 @@ namespace Textures {
                             Landscape,
                             Amazon,
                             Paladin,
-                            Wall
+                            Wall,
+                            Bars
                        };
 
         enum ID_InMenu {

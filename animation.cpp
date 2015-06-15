@@ -17,7 +17,7 @@ void Animation::update(sf::Time dt)
                     else
                         currentSprite.x = 0;
 
-                timeToChangeSprite = 70;
+                timeToChangeSprite = 100;
     }
     else timeToChangeSprite -= dt.asMilliseconds();
 

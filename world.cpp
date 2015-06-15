@@ -25,7 +25,7 @@ void World::moveEnemy(std::string nick, sf::Vector2f target)
     entities.moveEnemy(nick, target);
 }
 
-void World::initPlayer(Player player)
+void World::initPlayer(Player* player)
 {
     entities.initPlayer(player);
 }

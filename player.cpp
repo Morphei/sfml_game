@@ -3,7 +3,7 @@
 
 Player::Player()
 {
-    playerViev.reset(sf::FloatRect(0,0,1366,768));
+        playerView.reset(sf::FloatRect(0,0,1366,768));
 }
 
 void Player::setSpeed(int spd)
@@ -40,7 +40,5 @@ void Player::update(sf::Time deltaTime)
             }
     else
         mAnimation.update(deltaTime);
-
-    playerViev.setCenter(mPosition);
 
 }

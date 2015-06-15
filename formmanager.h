@@ -24,6 +24,8 @@ public:
     Form* form;
 
 private:
+
+
     bool ready = false;
 
     MessageSender sender;

@@ -13,7 +13,6 @@ void Parser::run()
     startRecieve();
     application.run();
     netOperator->unbind();
-    messenger.exitGame();
     stop();
 }
 
@@ -81,7 +80,9 @@ void Parser::recieve()
 
                         std::cout << "Char " << i+1 << " - " << nickname << " is type " << id << "\n";
 
+                        mutex.lock();
                         application.menuPointer->formManager.form->addChars(id, nickname, sf::Vector2f(i*120 + 40, 200));
+                        mutex.unlock();
 
                         std::cout << "adding char\n";
                     }

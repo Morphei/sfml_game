@@ -62,11 +62,6 @@ void GameMap::setTexture(Textures::ID_InGame id)
     wallSprite.setPosition(8000, 4000);
     wallSprite.setTexture(wallText);
 
-    vectors.push_back(downRight);
-    vectors.push_back(downLeft);
-    vectors.push_back(UpLeft);
-    vectors.push_back(UpRight);
-
 }
 
 void GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -106,51 +101,51 @@ void GameMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
                 }
 
-    wallSprite.setPosition(3000,1000);
+//    wallSprite.setPosition(3000,1000);
 
-    bool n = false;
-    bool dir = true;
+//    bool n = false;
+//    bool dir = true;
 
-    for (int i = 0; i < 4; i++)
-    {
-        sf::Vector2f currentVector = (vectors.at(i));
+//    for (int i = 0; i < 4; i++)
+//    {
+//        sf::Vector2f currentVector = (vectors.at(i));
 
-        for(int j = 0; j < 30; j++)
-        {
-            if(viewRect.intersects(wallSprite.getGlobalBounds()))
-            {
-                if(dir)
-                {
-                        if(n)
-                        {
-                             wallSprite.setTextureRect(sf::IntRect(0,0,124,100));
-                        }
+//        for(int j = 0; j < 30; j++)
+//        {
+//            if(viewRect.intersects(wallSprite.getGlobalBounds()))
+//            {
+//                if(dir)
+//                {
+//                        if(n)
+//                        {
+//                             wallSprite.setTextureRect(sf::IntRect(0,0,124,100));
+//                        }
 
-                        else
-                        {
-                             wallSprite.setTextureRect(sf::IntRect(124,0,124,100));
-                        }
+//                        else
+//                        {
+//                             wallSprite.setTextureRect(sf::IntRect(124,0,124,100));
+//                        }
 
-                }
-                else
-                {
-                        if(n)
-                        {
-                             wallSprite.setTextureRect(sf::IntRect(0,100,112,101));
-                        }
+//                }
+//                else
+//                {
+//                        if(n)
+//                        {
+//                             wallSprite.setTextureRect(sf::IntRect(0,100,112,101));
+//                        }
 
-                        else
-                        {
-                             wallSprite.setTextureRect(sf::IntRect(112,100,112,101));
-                        }
-                }
-                target.draw(wallSprite);
-            }
-            n = !n;
-            wallSprite.setPosition(wallSprite.getPosition() + currentVector);
-        }
-        dir = !dir;
-    }
+//                        else
+//                        {
+//                             wallSprite.setTextureRect(sf::IntRect(112,100,112,101));
+//                        }
+//                }
+//                target.draw(wallSprite);
+//            }
+//            n = !n;
+//            wallSprite.setPosition(wallSprite.getPosition() + currentVector);
+//        }
+//        dir = !dir;
+//    }
 
 //    drawWallRect(target, sf::Vector2f(8000, 4000), viewRect);
 

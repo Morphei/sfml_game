@@ -11,7 +11,7 @@ public:
 
     Player();
 
-    sf::View playerViev;
+    sf::View playerView;
 
     void setSpeed(int spd);
 
@@ -22,7 +22,7 @@ private:
         target.draw(mAnimation, states);
         target.draw(nicknameToDraw);
         if(gameState != States::Menu)
-        target.setView(playerViev);
+        target.setView(playerView);
 
     }
 

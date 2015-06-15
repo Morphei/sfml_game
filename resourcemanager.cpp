@@ -15,6 +15,7 @@ textureHolder.load(Textures::Amazon, "AmazonTexture.png");
 textureHolder.load(Textures::Paladin, "PaladinTexture.png");
 textureHolder.load(Textures::Landscape, "map2.png");
 textureHolder.load(Textures::Wall, "wall.png");
+textureHolder.load(Textures::Bars, "bars.png");
 
 fontHolder.load(Fonts::MainFontGame, "MainFont.ttf");
 

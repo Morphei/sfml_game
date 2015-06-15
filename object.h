@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <SFML/Graphics.hpp>
+#include "resourcemanager.h"
 
 class Object : sf::Drawable
 {
@@ -12,17 +13,26 @@ public:
 
     virtual sf::Sprite* getSprite();
 
-    virtual int getId();
+    virtual int getID() const;
     virtual void setID(int ID);
 
     virtual void setPosition(sf::Vector2f pos);
 
-    virtual sf::Vector2f getPosition();
+    virtual sf::Vector2f getPosition() const;
 
-//protected:
+    virtual void update(sf::Time deltaTime);
+
+    virtual void setTexture(Textures::ID_InGame id);
+    virtual void setTextureRect(sf::IntRect rect);
+
+//    virtual void move(sf::Vector2f target);
+
+    sf::Sprite sprite;
+
+protected:
     sf::Vector2f position;
     int objectID;
-    sf::Sprite sprite;
+
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {

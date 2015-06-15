@@ -54,7 +54,7 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
 
             form->createForm(Forms::ID::ChooseCharacters ,Textures::ChooseForm, position);
 
-            form->createChars();
+//            form->createChars();
 
             std::cout << "Exit Formmanager::create chars to ChCharForm\n";
             form->addButton(Forms::buttonID::Play, "Play", sf::Vector2f(10, 200), Textures::Button, Textures::ButtonPressed);
@@ -118,8 +118,11 @@ void FormManager::checkClick(sf::Vector2f mousePos)
 
                 case Forms::buttonID::Play:
                 {
-                    sender.sendChoosenChar(form->manager.getSeectedEnemy());
-                    gameState = States::Game;
+                    if(form->manager.getSeectedEnemy() != "")
+                    {
+                        sender.sendChoosenChar(form->manager.getSeectedEnemy());
+                        gameState = States::Game;
+                    }
                 }
                     break;
 
@@ -133,8 +136,12 @@ void FormManager::checkClick(sf::Vector2f mousePos)
                 case Forms::buttonID::CreateNew:
                 {
                     std::string nickname = form->getTextBoxText(Forms::textBoxID::LoginTextBox);
-                    EntityState::typeOfEntity type = form->manager.getSelectedEnemyType();
-                    sender.sendCreateNewChar(nickname, type);
+                    if(nickname != "")
+                    {
+                        EntityState::typeOfEntity type = form->manager.getSelectedEnemyType();
+                        sender.sendCreateNewChar(nickname, type);
+                    }
+
                 }
                     break;
 

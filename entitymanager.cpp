@@ -2,7 +2,9 @@
 
 EntityManager::EntityManager()
 {
-
+    constructor = new ObjectConstructor(&objects);
+//    EntityState::statsOfEntity stat;
+//    initPlayer(EntityState::Amazon, "test", sf::Vector2f(-1,-1), stat);
 }
 
 void EntityManager::checkClick(sf::Vector2f cursorPos)
@@ -10,13 +12,13 @@ void EntityManager::checkClick(sf::Vector2f cursorPos)
     unsigned short i = 0;
     for(auto itr = enemies.begin(); itr != enemies.end(); itr++)
     {
-        if((*itr).checkClick(cursorPos))
+        if((*itr)->checkClick(cursorPos))
             {
             for(auto itr2 = enemies.begin(); itr2 != enemies.end(); itr2++)
-                (*itr2).unColourise();
-            (*itr).colourise();
-            selectedEnemy = (*itr).getName();
-            selectedEnemyType = (*itr).getType();
+                (*itr2)->unColourise();
+            (*itr)->colourise();
+            selectedEnemy = (*itr)->getName();
+            selectedEnemyType = (*itr)->getType();
             }
     }
 }
@@ -33,72 +35,84 @@ EntityState::typeOfEntity EntityManager::getSelectedEnemyType()
 
 void EntityManager::addEnemy(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos)
 {
-    Enemy enemy;
-    enemy.setType(type);
-    enemy.setPosition(pos);
-    enemy.setName(nickname);
-    enemy.setID(countOfObjects);
+    Enemy *enemy = new Enemy;
+    enemy->setType(type);
+    enemy->setPosition(pos);
+    enemy->setName(nickname);
+    enemy->setID(countOfObjects);
     countOfObjects++;
-    enemies.push_back(enemy);
+    objects.push_back(enemy);
 
-    objectSprite oSprite;
-    oSprite.ID = enemy.getId();
-    oSprite.sprite = enemy.getSprite();
-    spritesToDraw.insert(std::pair<float, objectSprite>(enemy.getPosition().y, oSprite));
+//    objectSprite* oSprite = new objectSprite;
+//    oSprite->ID = enemy->getID();
+//    oSprite->sprite = enemy->getSprite();
+//    spritesToDraw.insert(std::pair<float, objectSprite*>(enemy->getPosition().y, oSprite));
 }
 
 void EntityManager::moveEnemy(std::string nick, sf::Vector2f target)
 {
     for(auto it = enemies.begin(); it != enemies.end(); it++)
     {
-        if((*it).getName() == nick)
+        if((*it)->getName() == nick)
         {
-            (*it).move(target);
+            (*it)->move(target);
         }
     }
 }
 
-void EntityManager::initPlayer(Player pl)
+void EntityManager::initPlayer(Player* pl)
 {
     mPlayer = pl;
 }
 
 void EntityManager::initPlayer(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos, EntityState::statsOfEntity stats)
 {
+    mPlayer = new Player;
     std::cout << "Setting type of player\n";
-    mPlayer.setType(type);
+    mPlayer->setType(type);
     std::cout << "Setting position\n";
-    mPlayer.setPosition(pos);
+    mPlayer->setPosition(pos);
     std::cout << "Setting stats\n";
-    mPlayer.setStats(stats);
-    mPlayer.setName(nickname);
+    mPlayer->setStats(stats);
+    mPlayer->setName(nickname);
     std::cout << "Exit init player///////\n";
     std::cout << "\n";
-    mPlayer.setID(countOfObjects);
+    mPlayer->setID(countOfObjects);
     countOfObjects++;
 
-    objectSprite oSprite;
-    oSprite.ID = mPlayer.getId();
-    oSprite.sprite = mPlayer.getSprite();
-    spritesToDraw.insert(std::pair<float, objectSprite>(mPlayer.getPosition().y, oSprite));
+    mPlayer->playerView.setCenter(pos);
+
+    objects.push_back(mPlayer);
+
+    hud.createHud(mPlayer);
+
+//    constructor->drawWall(sf::Vector2f(3000,1000), 20 , sf::Vector2f(3050, 1050));
+
+    addEnemy(EntityState::Amazon, "testEnemy", sf::Vector2f(3000,1050));
 }
 
 void EntityManager::movePlayer(sf::Vector2f target)
 {
-    mPlayer.move(target);
+    mPlayer->move(target);
 }
 
 void EntityManager::update(sf::Time deltaTime)
 {
-    for(auto itr = enemies.begin(); itr != enemies.end(); itr ++)
+    for(auto itr = objects.begin(); itr != objects.end(); itr ++)
     {
-        (*itr).update(deltaTime);
+        (*itr)->update(deltaTime);
     }
 
-    mPlayer.update(deltaTime);
+    if(mPlayer != nullptr)
+        mPlayer->playerView.setCenter(mPlayer->getPosition());
+//    {
+//        mPlayer->update(deltaTime);
 
-    std::sort(enemies.begin(), enemies.end(), [](const Enemy& tempA, const Enemy& tempB)
-    { return tempA.getPosition().y < tempB.getPosition().y;} );
+//    }
+
+
+    std::sort(objects.begin(), objects.end(), [](const Object* tempA, const Object* tempB)
+    { return tempA->getPosition().y < tempB->getPosition().y;} );
 
 }
 
@@ -106,34 +120,42 @@ void EntityManager::update(sf::Time deltaTime)
 void EntityManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 
-    for(auto itr = spritesToDraw.begin(); itr != spritesToDraw.end(); itr++)
+    for(auto itr = objects.begin(); itr != objects.end(); itr++)
     {
-        target.draw(*(*itr).second.sprite);
+        target.draw(*(*itr));
     }
 
-//        auto itr = enemies.begin();
 
-//        while(itr!= enemies.end())
+
+
+
+//        auto itr = objects.begin();
+
+//        while(itr!= objects.end())
 //        {
-//            if((*itr).getPosition().y < mPlayer.getPosition().y)
+//            if((*itr)->getPosition().y < mPlayer->getPosition().y)
 //            {
-//            target.draw((*itr));
+//            target.draw(*(*itr));
 //            }
 
 //            itr++;
 
 //        }
 
-//        itr = enemies.begin();
-//        target.draw(mPlayer);
+//        itr = objects.begin();
+//        if(mPlayer != nullptr)
+//        target.draw(*mPlayer);
 
-//        while(itr!= enemies.end())
+//        while(itr!= objects.end())
 //        {
-//            if((*itr).getPosition().y > mPlayer.getPosition().y)
+//            if((*itr)->getPosition().y > mPlayer->getPosition().y)
 //            {
-//            target.draw((*itr));
+//            target.draw(*(*itr));
 //            }
 //            itr++;
 //        }
+
+        if(mPlayer != nullptr)
+        target.draw(hud);
 
 }
