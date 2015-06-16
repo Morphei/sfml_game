@@ -178,6 +178,7 @@ void FormManager::processEvents(sf::Event event)
 
 void FormManager::close()
 {
+    sender.unbind();
     form->close();
 //    delete form;
 }

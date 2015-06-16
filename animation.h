@@ -14,6 +14,9 @@ public:
 
     Animation();
     void update(sf::Time dt);
+
+//    void setCountOfSprites(int norm, int att, int run);
+
     void init(EntityState::stateOfObject state, EntityState::direction dir);
 
     void setTexture(Textures::ID_InGame id);
@@ -29,6 +32,8 @@ public:
     sf::Sprite *getSprite();
 
 private:
+
+    EntityState::stateOfObject stateOfEntity;
 
     sf::Vector2f mPosition;
 

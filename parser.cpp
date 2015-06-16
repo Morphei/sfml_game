@@ -163,7 +163,6 @@ void Parser::recieve()
                 std::string nick;
                 sf::Vector2f pos;
                 packet >> nick >> pos.x >> pos.y;
-                std::cout << nick << " move to " << pos.x << ":" << pos.y << "\n";
                 application.gamePointer->mWorld.moveEnemy(nick, pos);
             }
                 break;

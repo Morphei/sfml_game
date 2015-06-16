@@ -14,8 +14,14 @@ void Animation::update(sf::Time dt)
 
                     if(currentSprite.x < countOfSpritesInRaw)
                         currentSprite.x ++;
+
                     else
+                    {
+                        if(stateOfEntity == EntityState::Attack)
+                            init(EntityState::Normal, orientation);
                         currentSprite.x = 0;
+                    }
+
 
                 timeToChangeSprite = 100;
     }
@@ -25,6 +31,8 @@ void Animation::update(sf::Time dt)
 
 void Animation::init(EntityState::stateOfObject state, EntityState::direction dir)
 {
+
+    stateOfEntity = state;
 
     orientation = dir;
 

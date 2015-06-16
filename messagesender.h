@@ -10,6 +10,10 @@ class MessageSender
 public:
     MessageSender();
 
+    void bind();
+    void unbind();
+
+    void attackEnemy(std::string name);
     void sendCharToDelete(std::string nickname, EntityState::typeOfEntity type);
     void sendCreateNewChar(std::string nickname, EntityState::typeOfEntity type);
     void exitGame();

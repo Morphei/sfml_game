@@ -5,9 +5,9 @@ World::World()
 {
 }
 
-void World::movePlayer(sf::Vector2f target)
+void World::clickPlayer(sf::Vector2f target)
 {
-    entities.movePlayer(target);
+    entities.playerClick(target);
 }
 
 void World::update(sf::Time deltaTime)
@@ -25,10 +25,10 @@ void World::moveEnemy(std::string nick, sf::Vector2f target)
     entities.moveEnemy(nick, target);
 }
 
-void World::initPlayer(Player* player)
-{
-    entities.initPlayer(player);
-}
+//void World::initPlayer(Player* player)
+//{
+//    entities.initPlayer(player);
+//}
 
 void World::initPlayer(EntityState::typeOfEntity id, std::string nick, sf::Vector2f position, EntityState::statsOfEntity stats)
 {

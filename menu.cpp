@@ -140,6 +140,7 @@ void Menu::createChooseCharactersForm()
 
 void Menu::startNew()
 {
+
     gameState = States::Game;
     mWindow.close();
 }

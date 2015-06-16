@@ -4,7 +4,11 @@ EntityManager::EntityManager()
 {
     constructor = new ObjectConstructor(&objects);
 //    EntityState::statsOfEntity stat;
-//    initPlayer(EntityState::Amazon, "test", sf::Vector2f(-1,-1), stat);
+//    stat.hitPoints = 50;
+//    stat.manaPoints = 60;
+
+//    initPlayer(EntityState::Amazon, "test", sf::Vector2f(3000,1000), stat);
+//    addEnemy(EntityState::typeOfEntity::Amazon, "meat", sf::Vector2f(3100, 1200));
 }
 
 void EntityManager::checkClick(sf::Vector2f cursorPos)
@@ -42,6 +46,7 @@ void EntityManager::addEnemy(EntityState::typeOfEntity type, std::string nicknam
     enemy->setID(countOfObjects);
     countOfObjects++;
     objects.push_back(enemy);
+    enemies.push_back(enemy);
 
 //    objectSprite* oSprite = new objectSprite;
 //    oSprite->ID = enemy->getID();
@@ -60,23 +65,14 @@ void EntityManager::moveEnemy(std::string nick, sf::Vector2f target)
     }
 }
 
-void EntityManager::initPlayer(Player* pl)
-{
-    mPlayer = pl;
-}
 
 void EntityManager::initPlayer(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos, EntityState::statsOfEntity stats)
 {
     mPlayer = new Player;
-    std::cout << "Setting type of player\n";
     mPlayer->setType(type);
-    std::cout << "Setting position\n";
     mPlayer->setPosition(pos);
-    std::cout << "Setting stats\n";
     mPlayer->setStats(stats);
     mPlayer->setName(nickname);
-    std::cout << "Exit init player///////\n";
-    std::cout << "\n";
     mPlayer->setID(countOfObjects);
     countOfObjects++;
 
@@ -86,13 +82,30 @@ void EntityManager::initPlayer(EntityState::typeOfEntity type, std::string nickn
 
     hud.createHud(mPlayer);
 
-//    constructor->drawWall(sf::Vector2f(3000,1000), 20 , sf::Vector2f(3050, 1050));
+    constructor->drawWall(&objects, sf::Vector2f(3000,1000), 20 , sf::Vector2f(3050, 1050));
+    constructor->drawWall(&objects, sf::Vector2f(4550,1750), 20 , sf::Vector2f(4250, 1850));
 
-    addEnemy(EntityState::Amazon, "testEnemy", sf::Vector2f(3000,1050));
+    constructor->drawWall(&objects, sf::Vector2f(2930,2500), 20 , sf::Vector2f(2800, 2300));
+    constructor->drawWall(&objects, sf::Vector2f(1450,1750), 20 , sf::Vector2f(1500, 1200));
+
+//    addEnemy(EntityState::Amazon, "testEnemy", sf::Vector2f(3000,1050));
 }
 
-void EntityManager::movePlayer(sf::Vector2f target)
+void EntityManager::playerClick(sf::Vector2f target)
 {
+    bool isAtt = false;
+    for(auto itr = enemies.begin(); itr != enemies.end(); itr++)
+    {
+        if((*itr)->getSprite()->getGlobalBounds().contains(target))
+        {
+
+            mPlayer->attack(target);
+            sender.attackEnemy((*itr)->getName());
+            isAtt = true;
+        }
+
+    }
+    if(!isAtt)
     mPlayer->move(target);
 }
 
@@ -105,57 +118,28 @@ void EntityManager::update(sf::Time deltaTime)
 
     if(mPlayer != nullptr)
         mPlayer->playerView.setCenter(mPlayer->getPosition());
-//    {
-//        mPlayer->update(deltaTime);
-
-//    }
-
-
-    std::sort(objects.begin(), objects.end(), [](const Object* tempA, const Object* tempB)
-    { return tempA->getPosition().y < tempB->getPosition().y;} );
-
 }
 
 
 void EntityManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+    if(mPlayer != nullptr)
+    target.setView(mPlayer->playerView);
+
+    sf::View currentView = target.getView();
+    sf::FloatRect viewRect = sf::FloatRect(sf::Vector2f(currentView.getCenter().x - (currentView.getSize().x)/2,currentView.getCenter().y -
+                                                        (currentView.getSize().y)/2) , currentView.getSize());
+
+    std::sort(objects.begin(), objects.end(), [](const Object* tempA, const Object* tempB)
+    { return tempA->getPosition().y < tempB->getPosition().y;} );
 
     for(auto itr = objects.begin(); itr != objects.end(); itr++)
     {
-        target.draw(*(*itr));
+        if(viewRect.intersects((*itr)->getSprite()->getGlobalBounds()))
+            target.draw(*(*itr));
     }
-
-
-
-
-
-//        auto itr = objects.begin();
-
-//        while(itr!= objects.end())
-//        {
-//            if((*itr)->getPosition().y < mPlayer->getPosition().y)
-//            {
-//            target.draw(*(*itr));
-//            }
-
-//            itr++;
-
-//        }
-
-//        itr = objects.begin();
-//        if(mPlayer != nullptr)
-//        target.draw(*mPlayer);
-
-//        while(itr!= objects.end())
-//        {
-//            if((*itr)->getPosition().y > mPlayer->getPosition().y)
-//            {
-//            target.draw(*(*itr));
-//            }
-//            itr++;
-//        }
+    i = false;
 
         if(mPlayer != nullptr)
         target.draw(hud);
-
 }

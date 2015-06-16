@@ -8,6 +8,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "headupdisplay.h"
+#include "messagesender.h"
 #include "objectconstructor.h"
 
 class EntityManager : public sf::Drawable
@@ -25,15 +26,19 @@ public:
 
     void moveEnemy(std::string nick, sf::Vector2f target);
 
-    void initPlayer(Player *pl);
-
     void initPlayer(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos, EntityState::statsOfEntity stats);
 
-    void movePlayer(sf::Vector2f target);
+    void playerClick(sf::Vector2f target);
 
     void update(sf::Time deltaTime);
 
+    //
+        mutable bool i = true;
+    //
+
 private:
+
+
     int countOfObjects = 0;
 
     HeadUpDisplay hud;
@@ -41,7 +46,7 @@ private:
 
 
     std::vector<Enemy*> enemies;
-    std::vector<Object*> objects;
+    mutable std::vector<Object*> objects;
 
     Player* mPlayer = nullptr;
 
@@ -49,6 +54,8 @@ private:
         sf::Sprite* sprite;
         int ID;
     };
+
+    MessageSender sender;
 
     sf::View playerView;
 

@@ -4,6 +4,22 @@ Entity::Entity()
 {
 }
 
+void Entity::attack(sf::Vector2f target)
+{
+//    state = EntityState::Attack;
+    targetCoordinates = target;
+
+    float dx = targetCoordinates.x - mPosition.x;
+    float dy = targetCoordinates.y - mPosition.y;
+    float rotation = (atan2(dy, dx) + PI) * 180 / PI;
+    int direct = rotation/22.5;
+
+    dir = static_cast<EntityState::direction>(direct);
+
+    setState(EntityState::Attack, dir);
+
+}
+
 void Entity::update(sf::Time deltaTime)
 {
     if(state == EntityState::stateOfObject::Run)
@@ -21,7 +37,6 @@ void Entity::update(sf::Time deltaTime)
 
                     mAnimation.setPosition(mPosition);
                     mAnimation.update(deltaTime);
-                    std::cout << "Position: " << mPosition.x << " " << mPosition.y << "\n";
                     }
 
                 else
@@ -51,7 +66,6 @@ void Entity::setName(std::string name)
     sf::FloatRect bounds = nicknameToDraw.getLocalBounds();
     nicknameToDraw.setOrigin(bounds.width / 2.f, bounds.height);
     nicknameToDraw.setPosition(mPosition.x, mPosition.y - mAnimation.getSprite()->getGlobalBounds().height * 1.1);
-    std::cout << "Name is setting [" << nickname << "] at " << nicknameToDraw.getPosition().x << ":" << nicknameToDraw.getPosition().y << "\n";
 }
 
 std::string Entity::getName()
@@ -106,16 +120,12 @@ EntityState::statsOfEntity Entity::getStats()
 
 void Entity::setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun)
 {
-    std::cout << "Before sett texture\n";
     mAnimation.setTexture(id);
-    std::cout << "Texture is setted, setting size [Entity::setTexture]\n";
     mAnimation.setSize(sizeNorm, sizeAttack, sizeRun);
-    std::cout << "setting texture&size to animation\n";
 }
 
 void Entity::initDefault()
 {
-    std::cout << "Entity::initDefault" << std::endl;
     mPosition = sf::Vector2f(200,200);
 }
 
@@ -127,7 +137,7 @@ void Entity::move(sf::Vector2f target)
     float dx = targetCoordinates.x - mPosition.x;
     float dy = targetCoordinates.y - mPosition.y;
     float rotation = (atan2(dy, dx) + PI) * 180 / PI;
-    int direct = rotation/22.4;
+    int direct = rotation/22.5;
 
     dir = static_cast<EntityState::direction>(direct);
 

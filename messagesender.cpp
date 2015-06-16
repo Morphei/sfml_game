@@ -5,6 +5,24 @@ MessageSender::MessageSender()
 {
 }
 
+void MessageSender::bind()
+{
+    netOperator.bind();
+}
+
+void MessageSender::unbind()
+{
+    netOperator.unbind();
+}
+
+void MessageSender::attackEnemy(std::string name)
+{
+    sf::Packet packet;
+    packet << MARK << LOCAL_PORT << NetworkCommands::Attack << name;
+    netOperator.send(packet);
+    std::cout << "MessageSender::Attack\n";
+}
+
 void MessageSender::sendCharToDelete(std::string nickname, EntityState::typeOfEntity type)
 {
     sf::Packet packet;

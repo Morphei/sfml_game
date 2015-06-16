@@ -2,7 +2,7 @@
 
 Application::Application()
 {
-    setState(States::Game);//TODO: Changed to intro
+    setState(States::Menu);//TODO: Changed to intro
     manager.load();
 }
 
@@ -28,7 +28,9 @@ void Application::run()
             {
                 gamePointer = new Game;
                 gamePointer->run();
+
                 gamePointer = nullptr;
+
             }
             break;
 

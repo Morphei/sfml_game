@@ -18,6 +18,8 @@ public:
 
     Entity();
 
+    virtual void attack(sf::Vector2f target);
+
     virtual void update(sf::Time deltaTime);
 
     virtual void setName(std::string name);

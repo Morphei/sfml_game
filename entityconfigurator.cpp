@@ -17,11 +17,8 @@ void EntityConfigurator::init(EntityState::typeOfEntity type, Entity *target)
 
         std::cout << "Init amazon: " << "\n";
             target->setTexture(Textures::Amazon, sf::Vector2i(76,80), sf::Vector2i(85,105), sf::Vector2i(88,82));
-            std::cout << "setTexture\n";
             target->setState(EntityState::Normal, EntityState::direction::DownLeftDown);
-            std::cout << "setState\n";
             target->setSpeed(200);
-            std::cout << "Exit init EntityConfig\n";
     }
         break;
 

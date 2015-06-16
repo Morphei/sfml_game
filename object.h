@@ -27,12 +27,13 @@ public:
 
 //    virtual void move(sf::Vector2f target);
 
-    sf::Sprite sprite;
+
 
 protected:
     sf::Vector2f position;
     int objectID;
 
+    sf::Sprite sprite;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {

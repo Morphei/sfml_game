@@ -12,7 +12,8 @@ namespace NetworkCommands{
                 InGame,
                 AddEnemy,
                 MouseClick,
-                ExitGame
+                ExitGame,
+                Attack
                 };
     }
 
@@ -99,6 +100,7 @@ namespace EntityState{
             unsigned short hitPoints;
             unsigned short manaPoints;
             unsigned short attack;
+            unsigned short attackSpeed;
             unsigned short defence;
     };
 

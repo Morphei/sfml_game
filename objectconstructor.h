@@ -12,7 +12,7 @@ public:
 
     ObjectConstructor(std::vector<Object*> *obj);
 
-    void drawWall(sf::Vector2f begin, int countOfSegments, sf::Vector2f dir);
+    void drawWall(std::vector<Object*> *objArr, sf::Vector2f begin, int countOfSegments, sf::Vector2f dir);
 
 
 private:

@@ -4,11 +4,15 @@
 
 Game::Game(): mWindow(sf::VideoMode(1366, 768), "Arms Race", sf::Style::Fullscreen)
 {
+    mWindow.setFramerateLimit(0);
     mWindow.setVerticalSyncEnabled(true);
-    EntityState::statsOfEntity st;
-    st.hitPoints = 100;
-    st.manaPoints = 100;
-    mWorld.initPlayer(EntityState::typeOfEntity::Amazon, "Test", sf::Vector2f(3200,1050), st);
+//    EntityState::statsOfEntity st;
+//    st.hitPoints = 100;
+//    st.manaPoints = 100;
+//    mWorld.initPlayer(EntityState::typeOfEntity::Amazon, "Test", sf::Vector2f(3200,1050), st);
+
+    debug.setFont(fontHolder.get(Fonts::MainFontGame));
+    debug.setCharacterSize(20);
 }
 
 
@@ -27,7 +31,10 @@ void Game::run()
     while(mWindow.isOpen())
          {
             timeSinceLastUpdate += mainClock.restart();
-            while(timeSinceLastUpdate > TimePerFrame)
+            std::string str = "FPS: " + std::to_string(int(1.f/timeSinceLastUpdate.asSeconds()));
+
+            debug.setString(str);
+            while(timeSinceLastUpdate >= TimePerFrame)
                 {
                     timeSinceLastUpdate -= TimePerFrame;
                     processEvents();
@@ -37,10 +44,10 @@ void Game::run()
     }
 }
 
-void Game::init(Player* pl)
-{
-    mWorld.initPlayer(pl);
-}
+//void Game::init(Player* pl)
+//{
+//    mWorld.initPlayer(pl);
+//}
 
 
 void Game::processEvents()
@@ -62,7 +69,7 @@ void Game::processEvents()
                 {
                         sf::Vector2i pixelPos = sf::Mouse::getPosition(mWindow);
                         sf::Vector2f pos = mWindow.mapPixelToCoords(pixelPos);
-                        mWorld.movePlayer(pos);
+                        mWorld.clickPlayer(pos);
                         sender.sendMouseClick(pos);
                 }
             }
@@ -92,6 +99,9 @@ void Game::render()
 {
     mWindow.clear();
     mWindow.draw(mWorld);
+    debug.setPosition(sf::Vector2f(mWindow.getView().getCenter().x - mWindow.getSize().x/2 + 20,
+                                   mWindow.getView().getCenter().y - mWindow.getSize().y/2 + 20));
+    mWindow.draw(debug);
     mWindow.display();
 }
 
@@ -102,6 +112,7 @@ bool Game::started()
 
 void Game::exit()
 {
+    sender.unbind();
     isRunning = false;
     mWindow.close();
 }

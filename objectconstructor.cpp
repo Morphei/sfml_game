@@ -7,15 +7,16 @@ ObjectConstructor::ObjectConstructor(std::vector<Object*> *obj)
     objects = obj;
 }
 
-void ObjectConstructor::drawWall(sf::Vector2f begin, int countOfSegments, sf::Vector2f dir)
+void ObjectConstructor::drawWall(std::vector<Object*> *objArr, sf::Vector2f begin, int countOfSegments, sf::Vector2f dir)
 {
     sf::Vector2f offset;
     Object* obj;
     short row = 0;
     bool col = 0;
+
     if(begin.x < dir.x)
     {
-        if(begin.y < dir.y) // Up-Right
+        if(begin.y > dir.y) // Up-Right
         {
             row = 1;
             offset.x = 80;
@@ -30,7 +31,7 @@ void ObjectConstructor::drawWall(sf::Vector2f begin, int countOfSegments, sf::Ve
     }
     else
     {
-        if(begin.y < dir.y) // Up-Left
+        if(begin.y > dir.y) // Up-Left
         {
             row = 0;
             offset.x = -80;
@@ -47,9 +48,9 @@ void ObjectConstructor::drawWall(sf::Vector2f begin, int countOfSegments, sf::Ve
     sf::Vector2f pos = begin;
     obj = new Object;
     obj->setTexture(Textures::Wall);
-    obj->setTextureRect(sf::IntRect(112*col, 100 * row, 112, 100));
+    obj->setTextureRect(sf::IntRect(124*col, 100 * row, 124, 100));
     obj->setPosition(pos);
-    objects->push_back(obj);
+    objArr->push_back(obj);
     col = !col;
     pos += offset;
     for(int i = 1; i < countOfSegments; i++)
@@ -57,10 +58,10 @@ void ObjectConstructor::drawWall(sf::Vector2f begin, int countOfSegments, sf::Ve
         obj = new Object;
         obj->setPosition(pos);
         obj->setTexture(Textures::Wall);
-        obj->setTextureRect(sf::IntRect(112*col, 100 * row, 112, 100));
-        objects->push_back(obj);
+        obj->setTextureRect(sf::IntRect(124*col, 100 * row, 124, 100));
+        objArr->push_back(obj);
         col = !col;
         pos += offset;
     }
-    std::cout << "Exit create wall\n";
+//    std::cout << "Exit create wall\n";
 }
