@@ -38,6 +38,8 @@ public:
 
     virtual void setState(EntityState::stateOfObject st, EntityState::direction dr);
 
+    virtual void setState(EntityState::stateOfObject st, EntityState::direction dr, int norm, int att, int run);
+
     virtual void setType(EntityState::typeOfEntity enType);
 
     virtual EntityState::typeOfEntity getType();
@@ -55,6 +57,9 @@ public:
     virtual sf::Sprite* getSprite();
 
     virtual EntityState::statsOfEntity getStats();
+
+    virtual bool checkClick(sf::Vector2f pos);
+
 
 protected:
 

@@ -15,6 +15,18 @@ void World::update(sf::Time deltaTime)
     entities.update(deltaTime);
 }
 
+void World::attackOtherEnemy(std::string attacker, std::string target)
+{
+    entities.findEnemy(attacker)->attack(entities.findEnemy(target)->getPosition());
+}
+
+
+
+void World::deleteEnemy(std::string nick)
+{
+    entities.deleteEnemy(nick);
+}
+
 void World::addEnemy(std::string nick, EntityState::typeOfEntity type, sf::Vector2f pos)
 {
     entities.addEnemy(type, nick, pos);

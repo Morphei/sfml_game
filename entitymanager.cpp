@@ -27,14 +27,67 @@ void EntityManager::checkClick(sf::Vector2f cursorPos)
     }
 }
 
-std::string EntityManager::getSeectedEnemy()
+std::string EntityManager::getSelectedEnemy()
 {
     return selectedEnemy;
+}
+
+void EntityManager::deleteEnemy(std::string nick)
+{
+    std::cout << nick << " is deleting\n";
+
+    int ID;
+
+    for(auto itr = enemies.begin(); itr != enemies.end(); itr++)
+    {
+        if(!enemies.empty())
+        {
+            if((*itr)->getName() == nick)
+            {
+                ID = (*itr)->getID();
+                enemies.erase(itr);
+                break;
+                std::cout << "Delete in enemies\n";
+            }
+        }
+        else itr = enemies.end();
+    }
+
+    std::cout << "ID to delete: " << ID << "\n";
+
+
+    for(auto itr = objects.begin(); itr != objects.end(); itr++)
+        if(!objects.empty())
+        {
+            if((*itr)->getID() == ID)
+            {
+                objects.erase(itr);
+                break;
+                std::cout << "Delete in objects\n";
+            }
+        }
 }
 
 EntityState::typeOfEntity EntityManager::getSelectedEnemyType()
 {
     return selectedEnemyType;
+}
+
+Player *EntityManager::getPlayer()
+{
+    return mPlayer;
+}
+
+Entity *EntityManager::findEnemy(std::string nick)
+{
+    std::cout << "Searching enemy\n";
+    for(auto itr = enemies.begin(); itr != enemies.end(); itr++)
+    {
+            if((*itr)->getName() == nick)
+            {
+                return (*itr);
+            }
+    }
 }
 
 void EntityManager::addEnemy(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos)
@@ -44,7 +97,9 @@ void EntityManager::addEnemy(EntityState::typeOfEntity type, std::string nicknam
     enemy->setPosition(pos);
     enemy->setName(nickname);
     enemy->setID(countOfObjects);
+    std::cout << "Add enemy with ID = " << enemy->getID() << "\n";
     countOfObjects++;
+
     objects.push_back(enemy);
     enemies.push_back(enemy);
 
@@ -80,6 +135,8 @@ void EntityManager::initPlayer(EntityState::typeOfEntity type, std::string nickn
 
     objects.push_back(mPlayer);
 
+    enemies.push_back(mPlayer);
+
     hud.createHud(mPlayer);
 
     constructor->drawWall(&objects, sf::Vector2f(3000,1000), 20 , sf::Vector2f(3050, 1050));
@@ -94,6 +151,7 @@ void EntityManager::initPlayer(EntityState::typeOfEntity type, std::string nickn
 void EntityManager::playerClick(sf::Vector2f target)
 {
     bool isAtt = false;
+
     for(auto itr = enemies.begin(); itr != enemies.end(); itr++)
     {
         if((*itr)->getSprite()->getGlobalBounds().contains(target))
@@ -105,8 +163,12 @@ void EntityManager::playerClick(sf::Vector2f target)
         }
 
     }
+
     if(!isAtt)
+    {
     mPlayer->move(target);
+    sender.sendMouseClick(target);
+    }
 }
 
 void EntityManager::update(sf::Time deltaTime)

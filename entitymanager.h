@@ -18,9 +18,15 @@ public:
 
     EntityState::typeOfEntity getSelectedEnemyType();
 
+    Player *getPlayer();
+
+    Entity *findEnemy(std::string nick);
+
     void checkClick(sf::Vector2f cursorPos);
 
-    std::string getSeectedEnemy();
+    std::string getSelectedEnemy();
+
+    void deleteEnemy(std::string nick);
 
     void addEnemy(EntityState::typeOfEntity type, std::string nickname, sf::Vector2f pos);
 
@@ -45,7 +51,7 @@ private:
     ObjectConstructor* constructor;
 
 
-    std::vector<Enemy*> enemies;
+    std::vector<Entity*> enemies;
     mutable std::vector<Object*> objects;
 
     Player* mPlayer = nullptr;

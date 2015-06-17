@@ -7,6 +7,8 @@ Entity::Entity()
 void Entity::attack(sf::Vector2f target)
 {
 //    state = EntityState::Attack;
+//    if(type != EntityState::Paladin)
+//    {
     targetCoordinates = target;
 
     float dx = targetCoordinates.x - mPosition.x;
@@ -15,7 +17,10 @@ void Entity::attack(sf::Vector2f target)
     int direct = rotation/22.5;
 
     dir = static_cast<EntityState::direction>(direct);
-
+//    }
+//    else
+//        move(target);
+    std::cout << "Setting state of enemy\n";
     setState(EntityState::Attack, dir);
 
 }
@@ -118,6 +123,13 @@ EntityState::statsOfEntity Entity::getStats()
     return stats;
 }
 
+bool Entity::checkClick(sf::Vector2f pos)
+{
+    if(mAnimation.getSprite()->getGlobalBounds().contains(pos))
+        return true;
+    else return false;
+}
+
 void Entity::setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun)
 {
     mAnimation.setTexture(id);
@@ -144,6 +156,14 @@ void Entity::move(sf::Vector2f target)
     setState(EntityState::Run, dir);
 }
 
+
+void Entity::setState(EntityState::stateOfObject st, EntityState::direction dr, int norm, int att, int run)
+{
+    state = st;
+    dir = dr;
+    mAnimation.init(state, dir);
+    mAnimation.setCountOfSprites(norm, att, run);
+}
 
 void Entity::setState(EntityState::stateOfObject st, EntityState::direction dr)
 {

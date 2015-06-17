@@ -17,8 +17,9 @@ void EntityConfigurator::init(EntityState::typeOfEntity type, Entity *target)
 
         std::cout << "Init amazon: " << "\n";
             target->setTexture(Textures::Amazon, sf::Vector2i(76,80), sf::Vector2i(85,105), sf::Vector2i(88,82));
-            target->setState(EntityState::Normal, EntityState::direction::DownLeftDown);
+            target->setState(EntityState::Normal, EntityState::direction::DownLeftDown, 16, 14, 8);
             target->setSpeed(200);
+
     }
         break;
 
@@ -33,7 +34,7 @@ void EntityConfigurator::init(EntityState::typeOfEntity type, Entity *target)
         //168x116 - Attack
         //94x103 - Run
         target->setTexture(Textures::Paladin, sf::Vector2i(62,80), sf::Vector2i(168,116), sf::Vector2i(94,103));
-        target->setState(EntityState::Normal, EntityState::DownLeftDown);
+        target->setState(EntityState::Normal, EntityState::DownLeftDown, 16, 15, 8);
         target->setSpeed(200);
     }
         break;

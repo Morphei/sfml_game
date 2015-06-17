@@ -15,6 +15,8 @@ public:
     void clickPlayer(sf::Vector2f target);
     void update(sf::Time deltaTime);
 
+    void attackOtherEnemy(std::string attacker, std::string target);
+    void deleteEnemy(std::string nick);
     void addEnemy(std::string nick, EntityState::typeOfEntity type, sf::Vector2f pos);
     void moveEnemy(std::string nick, sf::Vector2f target);
 //    void initPlayer(Player *player);

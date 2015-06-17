@@ -118,9 +118,9 @@ void FormManager::checkClick(sf::Vector2f mousePos)
 
                 case Forms::buttonID::Play:
                 {
-                    if(form->manager.getSeectedEnemy() != "")
+                    if(form->manager.getSelectedEnemy() != "")
                     {
-                        sender.sendChoosenChar(form->manager.getSeectedEnemy());
+                        sender.sendChoosenChar(form->manager.getSelectedEnemy());
                         gameState = States::Game;
                     }
                 }
@@ -147,7 +147,7 @@ void FormManager::checkClick(sf::Vector2f mousePos)
 
                 case Forms::buttonID::Delete_char:
                 {
-                    std::string nickname = form->manager.getSeectedEnemy();
+                    std::string nickname = form->manager.getSelectedEnemy();
                     EntityState::typeOfEntity type = form->manager.getSelectedEnemyType();
 
                     sender.sendCharToDelete(nickname, type);

@@ -12,7 +12,7 @@ void Animation::update(sf::Time dt)
 
                 mSprite.setTextureRect(sf::IntRect(currentSprite.x * width, currentSprite.y, width, height));
 
-                    if(currentSprite.x < countOfSpritesInRaw)
+                    if(currentSprite.x < spritesInRaw)
                         currentSprite.x ++;
 
                     else
@@ -27,6 +27,13 @@ void Animation::update(sf::Time dt)
     }
     else timeToChangeSprite -= dt.asMilliseconds();
 
+}
+
+void Animation::setCountOfSprites(int norm, int att, int run)
+{
+    countOfSpritesInRaw.normal = norm;
+    countOfSpritesInRaw.attack = att;
+    countOfSpritesInRaw.run = run;
 }
 
 void Animation::init(EntityState::stateOfObject state, EntityState::direction dir)
@@ -53,7 +60,7 @@ void Animation::init(EntityState::stateOfObject state, EntityState::direction di
                 sf::FloatRect bounds = mSprite.getLocalBounds();
                 mSprite.setOrigin(bounds.width / 2.f, bounds.height);
 
-                countOfSpritesInRaw = 7;
+                spritesInRaw = countOfSpritesInRaw.run;
 
             }
         break;
@@ -74,7 +81,7 @@ void Animation::init(EntityState::stateOfObject state, EntityState::direction di
                 sf::FloatRect bounds = mSprite.getLocalBounds();
                 mSprite.setOrigin(bounds.width / 2.f, bounds.height);
 
-                countOfSpritesInRaw = 15;
+                spritesInRaw = countOfSpritesInRaw.normal;
 
             }
         break;
@@ -93,7 +100,7 @@ void Animation::init(EntityState::stateOfObject state, EntityState::direction di
                 sf::FloatRect bounds = mSprite.getLocalBounds();
                 mSprite.setOrigin(bounds.width / 2.f, bounds.height);
 
-                countOfSpritesInRaw = 14;
+                spritesInRaw = countOfSpritesInRaw.attack;
             }
         break;
     }

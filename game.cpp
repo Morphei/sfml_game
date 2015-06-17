@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Game::Game(): mWindow(sf::VideoMode(1366, 768), "Arms Race", sf::Style::Fullscreen)
+Game::Game(): mWindow(sf::VideoMode(640, 480), "Arms Race"/*, sf::Style::Fullscreen*/)
 {
     mWindow.setFramerateLimit(0);
     mWindow.setVerticalSyncEnabled(true);
@@ -70,7 +70,7 @@ void Game::processEvents()
                         sf::Vector2i pixelPos = sf::Mouse::getPosition(mWindow);
                         sf::Vector2f pos = mWindow.mapPixelToCoords(pixelPos);
                         mWorld.clickPlayer(pos);
-                        sender.sendMouseClick(pos);
+//                        sender.sendMouseClick(pos);
                 }
             }
 

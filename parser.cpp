@@ -169,6 +169,7 @@ void Parser::recieve()
 
             case NetworkCommands::DeleteChar:
             {
+
             }
                 break;
 
@@ -183,6 +184,29 @@ void Parser::recieve()
                 }
             }
                 break;
+
+            case NetworkCommands::ExitGame:
+            {
+
+                std::string nick;
+                packet >> nick;
+                std::cout << "Nick in parser: " << nick << "\n";
+                std::cout << "Enter delete enemy in parser\n";
+                application.gamePointer->mWorld.deleteEnemy(nick);
+            }
+                break;
+
+            case NetworkCommands::Attack:
+            {
+                std::cout << "Attack other enemy\n";
+                std::string target, attacker;
+                packet >> attacker >> target;
+                std::cout << "Enemy " << attacker << " attacking " << target << "\n";
+                application.gamePointer->mWorld.attackOtherEnemy(attacker, target);
+
+            }
+                break;
+
             default:
                 std::cout << "404\n";
             break;

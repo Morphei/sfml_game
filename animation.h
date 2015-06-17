@@ -15,7 +15,7 @@ public:
     Animation();
     void update(sf::Time dt);
 
-//    void setCountOfSprites(int norm, int att, int run);
+    void setCountOfSprites(int norm, int att, int run);
 
     void init(EntityState::stateOfObject state, EntityState::direction dir);
 
@@ -43,7 +43,14 @@ private:
 
     EntityState::direction orientation;
 
-    int countOfSpritesInRaw = 14;
+    int spritesInRaw;
+
+    struct count
+    {
+        int normal;
+        int attack;
+        int run;
+    } countOfSpritesInRaw;
 
     sf::Vector2i currentSprite;
 
