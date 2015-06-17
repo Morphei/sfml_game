@@ -4,6 +4,11 @@ Entity::Entity()
 {
 }
 
+EntityState::stateOfObject Entity::getState()
+{
+    return mAnimation.getState();
+}
+
 void Entity::attack(sf::Vector2f target)
 {
 //    state = EntityState::Attack;
@@ -20,7 +25,6 @@ void Entity::attack(sf::Vector2f target)
 //    }
 //    else
 //        move(target);
-    std::cout << "Setting state of enemy\n";
     setState(EntityState::Attack, dir);
 
 }
@@ -161,8 +165,9 @@ void Entity::setState(EntityState::stateOfObject st, EntityState::direction dr, 
 {
     state = st;
     dir = dr;
-    mAnimation.init(state, dir);
     mAnimation.setCountOfSprites(norm, att, run);
+    mAnimation.init(state, dir);
+
 }
 
 void Entity::setState(EntityState::stateOfObject st, EntityState::direction dr)

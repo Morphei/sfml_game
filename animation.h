@@ -13,6 +13,9 @@ class Animation : public sf::Drawable
 public:
 
     Animation();
+
+    EntityState::stateOfObject getState();
+
     void update(sf::Time dt);
 
     void setCountOfSprites(int norm, int att, int run);

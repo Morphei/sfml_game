@@ -3,12 +3,12 @@
 EntityManager::EntityManager()
 {
     constructor = new ObjectConstructor(&objects);
-//    EntityState::statsOfEntity stat;
-//    stat.hitPoints = 50;
-//    stat.manaPoints = 60;
+    EntityState::statsOfEntity stat;
+    stat.hitPoints = 50;
+    stat.manaPoints = 60;
 
-//    initPlayer(EntityState::Amazon, "test", sf::Vector2f(3000,1000), stat);
-//    addEnemy(EntityState::typeOfEntity::Amazon, "meat", sf::Vector2f(3100, 1200));
+    initPlayer(EntityState::Amazon, "test", sf::Vector2f(3000,1000), stat);
+    addEnemy(EntityState::typeOfEntity::Amazon, "meat", sf::Vector2f(3100, 1200));
 }
 
 void EntityManager::checkClick(sf::Vector2f cursorPos)
@@ -156,10 +156,15 @@ void EntityManager::playerClick(sf::Vector2f target)
     {
         if((*itr)->getSprite()->getGlobalBounds().contains(target))
         {
-
-            mPlayer->attack(target);
-            sender.attackEnemy((*itr)->getName());
             isAtt = true;
+
+            if(mPlayer->getState() != EntityState::Attack)
+            {
+                std::cout << "Enter if playerState != Attack\n";
+
+                mPlayer->attack(target);
+                sender.attackEnemy((*itr)->getName());
+            }
         }
 
     }

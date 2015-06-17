@@ -2,14 +2,14 @@
 #include <iostream>
 
 
-Game::Game(): mWindow(sf::VideoMode(640, 480), "Arms Race"/*, sf::Style::Fullscreen*/)
+Game::Game(): mWindow(sf::VideoMode(1366, 768), "Arms Race", sf::Style::Fullscreen)
 {
     mWindow.setFramerateLimit(0);
     mWindow.setVerticalSyncEnabled(true);
 //    EntityState::statsOfEntity st;
-//    st.hitPoints = 100;
-//    st.manaPoints = 100;
-//    mWorld.initPlayer(EntityState::typeOfEntity::Amazon, "Test", sf::Vector2f(3200,1050), st);
+//    st.hitPoints = 10;
+//    st.manaPoints = 20;
+//    mWorld.initPlayer(EntityState::typeOfEntity::Paladin, "Test", sf::Vector2f(3200,1050), st);
 
     debug.setFont(fontHolder.get(Fonts::MainFontGame));
     debug.setCharacterSize(20);

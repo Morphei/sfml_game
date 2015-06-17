@@ -18,6 +18,8 @@ public:
 
     Entity();
 
+    EntityState::stateOfObject getState();
+
     virtual void attack(sf::Vector2f target);
 
     virtual void update(sf::Time deltaTime);

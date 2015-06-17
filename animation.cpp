@@ -4,6 +4,11 @@ Animation::Animation()
 {
 }
 
+EntityState::stateOfObject Animation::getState()
+{
+    return stateOfEntity;
+}
+
 void Animation::update(sf::Time dt)
 {
 
@@ -12,7 +17,7 @@ void Animation::update(sf::Time dt)
 
                 mSprite.setTextureRect(sf::IntRect(currentSprite.x * width, currentSprite.y, width, height));
 
-                    if(currentSprite.x < spritesInRaw)
+                    if(currentSprite.x < spritesInRaw - 1)
                         currentSprite.x ++;
 
                     else

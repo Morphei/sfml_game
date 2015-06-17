@@ -31,9 +31,9 @@ void EntityConfigurator::init(EntityState::typeOfEntity type, Entity *target)
     {
         std::cout << "Init paladin: " << "\n";
         //62x80 - Normal
-        //168x116 - Attack
+        //179x116 - Attack
         //94x103 - Run
-        target->setTexture(Textures::Paladin, sf::Vector2i(62,80), sf::Vector2i(168,116), sf::Vector2i(94,103));
+        target->setTexture(Textures::Paladin, sf::Vector2i(62,80), sf::Vector2i(179,116), sf::Vector2i(94,103));
         target->setState(EntityState::Normal, EntityState::DownLeftDown, 16, 15, 8);
         target->setSpeed(200);
     }
