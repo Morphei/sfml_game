@@ -22,10 +22,11 @@ public:
 //    void initPlayer(Player *player);
     void initPlayer(EntityState::typeOfEntity id, std::string nick, sf::Vector2f position, EntityState::statsOfEntity stats);
     void initMap(Textures::ID_InGame id);
+        EntityManager entities;
 
 private:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    EntityManager entities;
+
     GameMap map;
 };
 

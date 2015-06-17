@@ -17,6 +17,7 @@ void World::update(sf::Time deltaTime)
 
 void World::attackOtherEnemy(std::string attacker, std::string target)
 {
+    std::cout << "World::attackOtherEnemy - " << attacker << " : " << target << "\n";
     entities.findEnemy(attacker)->attack(entities.findEnemy(target)->getPosition());
 }
 

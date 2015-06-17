@@ -122,9 +122,9 @@ sf::Sprite* Entity::getSprite()
     return mAnimation.getSprite();
 }
 
-EntityState::statsOfEntity Entity::getStats()
+EntityState::statsOfEntity *Entity::getStats()
 {
-    return stats;
+    return &stats;
 }
 
 bool Entity::checkClick(sf::Vector2f pos)

@@ -13,7 +13,8 @@ namespace NetworkCommands{
                 AddEnemy,
                 MouseClick,
                 ExitGame,
-                Attack
+                Attack,
+                SetStats
                 };
     }
 

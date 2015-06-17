@@ -33,7 +33,7 @@ void HeadUpDisplay::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     hitBar.setTextureRect(sf::IntRect(0,0,15,6));
     hitBar.setPosition(hitBar.getPosition() + sf::Vector2f(0,-4));
     target.draw(hitBar);
-    for(int i = 0; i < pl->getStats().hitPoints; i++)
+    for(int i = 0; i < pl->getStats()->hitPoints; i++)
     {
         hitBar.setPosition(hitBar.getPosition() + sf::Vector2f(0,-4));
         target.draw(hitBar);
@@ -45,7 +45,7 @@ void HeadUpDisplay::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     hitBar.setTextureRect(sf::IntRect(15,0,15,6));
     hitBar.setPosition(hitBar.getPosition() + sf::Vector2f(0,-4));
     target.draw(hitBar);
-    for(int i = 0; i < pl->getStats().manaPoints; i++)
+    for(int i = 0; i < pl->getStats()->manaPoints; i++)
     {
         hitBar.setPosition(hitBar.getPosition() + sf::Vector2f(0,-4));
         target.draw(hitBar);

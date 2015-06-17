@@ -207,6 +207,14 @@ void Parser::recieve()
             }
                 break;
 
+            case NetworkCommands::SetStats:
+            {
+                short hp;
+                packet >> hp;
+                application.gamePointer->mWorld.entities.getPlayer()->getStats()->hitPoints = hp;
+            }
+                break;
+
             default:
                 std::cout << "404\n";
             break;

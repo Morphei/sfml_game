@@ -3,12 +3,12 @@
 EntityManager::EntityManager()
 {
     constructor = new ObjectConstructor(&objects);
-    EntityState::statsOfEntity stat;
-    stat.hitPoints = 50;
-    stat.manaPoints = 60;
+//    EntityState::statsOfEntity stat;
+//    stat.hitPoints = 50;
+//    stat.manaPoints = 60;
 
-    initPlayer(EntityState::Amazon, "test", sf::Vector2f(3000,1000), stat);
-    addEnemy(EntityState::typeOfEntity::Amazon, "meat", sf::Vector2f(3100, 1200));
+//    initPlayer(EntityState::Amazon, "test", sf::Vector2f(3000,1000), stat);
+//    addEnemy(EntityState::typeOfEntity::Amazon, "meat", sf::Vector2f(3100, 1200));
 }
 
 void EntityManager::checkClick(sf::Vector2f cursorPos)

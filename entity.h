@@ -58,7 +58,7 @@ public:
 
     virtual sf::Sprite* getSprite();
 
-    virtual EntityState::statsOfEntity getStats();
+    virtual EntityState::statsOfEntity* getStats();
 
     virtual bool checkClick(sf::Vector2f pos);
 
