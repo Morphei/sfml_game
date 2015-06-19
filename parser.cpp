@@ -209,9 +209,31 @@ void Parser::recieve()
 
             case NetworkCommands::SetStats:
             {
-                short hp;
+                short att,def,hp,mana;
+                sf::Vector2f pos;
+                packet >> att;
+                packet >> def;
                 packet >> hp;
+                packet >> mana;
+                packet >> pos.x;
+                packet >> pos.y;
+                application.gamePointer->mWorld.entities.getPlayer()->setPosition(pos);
+                application.gamePointer->mWorld.entities.getPlayer()->getStats()->manaPoints = mana;
                 application.gamePointer->mWorld.entities.getPlayer()->getStats()->hitPoints = hp;
+                application.gamePointer->mWorld.entities.getPlayer()->getStats()->attack = att;
+                application.gamePointer->mWorld.entities.getPlayer()->getStats()->defence = def;
+
+            }
+                break;
+
+            case NetworkCommands::Kill:
+            {
+                std::string killer, killed;
+                packet >> killer;
+                packet >> killed;
+                sf::Vector2f pos = sf::Vector2f(3000,1250);
+                application.gamePointer->mWorld.entities.findEnemy(killed)->setPosition(pos);
+                application.gamePointer->mWorld.entities.setKillText(killer, killed);
             }
                 break;
 

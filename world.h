@@ -6,15 +6,19 @@
 
 #include "entitymanager.h"
 #include "gamemap.h"
+#include "formmanager.h"
 
 class World : public sf::Drawable
 {
 public:
     World();
 
+
     void clickPlayer(sf::Vector2f target);
     void update(sf::Time deltaTime);
 
+    void showStats();
+    void closeStats();
     void attackOtherEnemy(std::string attacker, std::string target);
     void deleteEnemy(std::string nick);
     void addEnemy(std::string nick, EntityState::typeOfEntity type, sf::Vector2f pos);
@@ -25,6 +29,8 @@ public:
         EntityManager entities;
 
 private:
+    FormManager formManager;
+
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     GameMap map;

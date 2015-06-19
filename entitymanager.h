@@ -16,6 +16,8 @@ class EntityManager : public sf::Drawable
 public:
     EntityManager();
 
+    void setKillText(std::string killer, std::string killed);
+
     EntityState::typeOfEntity getSelectedEnemyType();
 
     Player *getPlayer();
@@ -43,7 +45,9 @@ public:
     //
 
 private:
+    int timer = 20000;
 
+    bool drawKill = false;
 
     int countOfObjects = 0;
 
@@ -62,6 +66,8 @@ private:
     };
 
     MessageSender sender;
+
+    sf::Text killText;
 
     sf::View playerView;
 

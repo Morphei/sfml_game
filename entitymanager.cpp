@@ -3,12 +3,25 @@
 EntityManager::EntityManager()
 {
     constructor = new ObjectConstructor(&objects);
-//    EntityState::statsOfEntity stat;
-//    stat.hitPoints = 50;
-//    stat.manaPoints = 60;
+    EntityState::statsOfEntity stat;
+    stat.hitPoints = 50;
+    stat.manaPoints = 60;
+    killText.setCharacterSize(20);
+    killText.setFont(fontHolderMenu.get(Fonts::MainFontMenu));
+//    initPlayer(EntityState::Amazon, "test", sf::Vector2f(3100,1100), stat);
+    //    addEnemy(EntityState::typeOfEntity::Amazon, "meat", sf::Vector2f(3100, 1200));
+}
 
-//    initPlayer(EntityState::Amazon, "test", sf::Vector2f(3000,1000), stat);
-//    addEnemy(EntityState::typeOfEntity::Amazon, "meat", sf::Vector2f(3100, 1200));
+void EntityManager::setKillText(std::string killer, std::string killed)
+{
+    killText.setPosition(mPlayer->playerView.getCenter() - sf::Vector2f(mPlayer->playerView.getSize().x / 2.1,
+                                                                        mPlayer->playerView.getSize().y / 2.3));
+    timer = 20000;
+    std::string str;
+    str = killer + " just killed " + killed;
+    std::cout << killer << " killed " << killed << std::endl;
+    killText.setString(str);
+    drawKill = true;
 }
 
 void EntityManager::checkClick(sf::Vector2f cursorPos)
@@ -171,20 +184,71 @@ void EntityManager::playerClick(sf::Vector2f target)
 
     if(!isAtt)
     {
-    mPlayer->move(target);
-    sender.sendMouseClick(target);
+        bool canMove = true;
+        for(auto itr = objects.begin(); itr != objects.end(); itr++)
+        {
+            if((*itr)->getSprite()->getGlobalBounds().contains(target))
+            {
+               if((*itr)->getClassName() == ObjectType::Object)
+               {
+                    canMove = false;
+               }
+
+            }
+
+        }
+        if(canMove)
+        {
+            mPlayer->move(target);
+            sender.sendMouseClick(target);
+        }
+
     }
 }
-
 void EntityManager::update(sf::Time deltaTime)
 {
+    timer--;
+
+    if (timer <= 0)
+    {
+        drawKill = false;
+    }
+
+        sf::FloatRect playerRect;
+    if(mPlayer != nullptr)
+    playerRect = sf::FloatRect(mPlayer->getPosition().x - 10, mPlayer->getPosition().y - 10, 10, 10);
+
     for(auto itr = objects.begin(); itr != objects.end(); itr ++)
     {
         (*itr)->update(deltaTime);
+
+        if((*itr)->getClassName() == ObjectType::Object)
+        {
+            if((*itr)->getSprite()->getGlobalBounds().intersects(playerRect) /*&& !mPlayer->isStopped()*/)
+            {
+                sf::Vector2f temp;
+                temp.x = mPlayer->getPosition().x - (*itr)->getPosition().x;
+                temp.y = mPlayer->getPosition().y - (*itr)->getPosition().y;
+
+                mPlayer->stop();
+
+                mPlayer->move(mPlayer->getPosition() + sf::Vector2f(temp.x + 20 , temp.y + 20));
+
+//                mPlayer->stop();
+//                mPlayer->stop();
+//                mPlayer->setPosition(mPlayer->getPosition().x + );
+            }
+
+        }
     }
 
     if(mPlayer != nullptr)
         mPlayer->playerView.setCenter(mPlayer->getPosition());
+
+    if(drawKill)
+    killText.setPosition(mPlayer->playerView.getCenter() - sf::Vector2f(mPlayer->playerView.getSize().x / 2.1,
+                                                                        mPlayer->playerView.getSize().y / 2.3));
+
 }
 
 
@@ -209,4 +273,10 @@ void EntityManager::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 
         if(mPlayer != nullptr)
         target.draw(hud);
+
+        if(drawKill)
+        {
+
+            target.draw(killText);
+        }
 }

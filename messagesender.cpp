@@ -23,10 +23,10 @@ void MessageSender::attackEnemy(std::string name)
     std::cout << "MessageSender::Attack\n";
 }
 
-void MessageSender::sendCharToDelete(std::string nickname, EntityState::typeOfEntity type)
+void MessageSender::sendCharToDelete(std::string nickname)
 {
     sf::Packet packet;
-    packet << MARK << LOCAL_PORT << NetworkCommands::DeleteChar << nickname << type;
+    packet << MARK << LOCAL_PORT << NetworkCommands::DeleteChar << nickname;
     netOperator.send(packet);
     std::cout << "MessageSender::Deleting\n";
 }

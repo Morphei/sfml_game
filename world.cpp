@@ -15,6 +15,16 @@ void World::update(sf::Time deltaTime)
     entities.update(deltaTime);
 }
 
+void World::showStats()
+{
+    formManager.createForm(Forms::ID::StatsForm, sf::Vector2f(100,100));
+}
+
+void World::closeStats()
+{
+    formManager.close();
+}
+
 void World::attackOtherEnemy(std::string attacker, std::string target)
 {
     std::cout << "World::attackOtherEnemy - " << attacker << " : " << target << "\n";
@@ -57,4 +67,5 @@ void World::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(map);
     target.draw(entities);
+    target.draw(formManager);
 }

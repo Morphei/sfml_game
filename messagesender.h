@@ -14,7 +14,7 @@ public:
     void unbind();
 
     void attackEnemy(std::string name);
-    void sendCharToDelete(std::string nickname, EntityState::typeOfEntity type);
+    void sendCharToDelete(std::string nickname);
     void sendCreateNewChar(std::string nickname, EntityState::typeOfEntity type);
     void exitGame();
     void sendMouseClick(sf::Vector2f pos);

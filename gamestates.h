@@ -14,7 +14,8 @@ namespace NetworkCommands{
                 MouseClick,
                 ExitGame,
                 Attack,
-                SetStats
+                SetStats,
+                Kill
                 };
     }
 
@@ -33,7 +34,8 @@ namespace Forms {
         RegisterForm,
         LoginForm,
         ChooseCharacters,
-        CreateNewChar
+        CreateNewChar,
+        StatsForm
     };
 
     enum Components{
@@ -103,6 +105,17 @@ namespace EntityState{
             unsigned short attack;
             unsigned short attackSpeed;
             unsigned short defence;
+    };
+
+}
+
+namespace ObjectType {
+
+    enum ID{
+        Object,
+        Entity,
+        Enemy,
+        Player
     };
 
 }

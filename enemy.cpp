@@ -2,7 +2,7 @@
 
 Enemy::Enemy()
 {
-
+    classType = ObjectType::Enemy;
 }
 
 bool Enemy::checkClick(sf::Vector2f pos)

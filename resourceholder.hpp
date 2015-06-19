@@ -15,10 +15,12 @@ namespace Textures {
                             Amazon,
                             Paladin,
                             Wall,
-                            Bars
+                            Bars,
+
                        };
 
         enum ID_InMenu {
+                            StatForm,
                             Button,
                             ButtonPressed,
                             MenuBackground,
@@ -33,7 +35,8 @@ namespace Textures {
                             CloseButton,
                             CloseButtonPressed,
                             TextBox,
-                            ChooseForm
+                            ChooseForm,
+                            CreateCharForm
                        };
     }
 

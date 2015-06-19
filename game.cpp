@@ -31,9 +31,9 @@ void Game::run()
     while(mWindow.isOpen())
          {
             timeSinceLastUpdate += mainClock.restart();
-            std::string str = "FPS: " + std::to_string(int(1.f/timeSinceLastUpdate.asSeconds()));
+//            std::string str = "FPS: " + std::to_string(int(1.f/timeSinceLastUpdate.asSeconds()));
 
-            debug.setString(str);
+//            debug.setString(str);
             while(timeSinceLastUpdate >= TimePerFrame)
                 {
                     timeSinceLastUpdate -= TimePerFrame;
@@ -83,6 +83,16 @@ void Game::processEvents()
                     mWindow.close();
                     exit();
                 }
+                if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Tab)
+                {
+                    mWorld.showStats();
+                }
+
+                if(event.type == sf::Event::KeyReleased)
+                {
+                    mWorld.closeStats();
+                }
+
             }
 
         }
@@ -99,9 +109,10 @@ void Game::render()
 {
     mWindow.clear();
     mWindow.draw(mWorld);
+//    mWindow.draw(formManager);
     debug.setPosition(sf::Vector2f(mWindow.getView().getCenter().x - mWindow.getSize().x/2 + 20,
                                    mWindow.getView().getCenter().y - mWindow.getSize().y/2 + 20));
-    mWindow.draw(debug);
+//    mWindow.draw(debug);
     mWindow.display();
 }
 

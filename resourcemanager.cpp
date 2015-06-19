@@ -16,13 +16,15 @@ textureHolder.load(Textures::Paladin, "PaladinTexture.png");
 textureHolder.load(Textures::Landscape, "map2.png");
 textureHolder.load(Textures::Wall, "wall.png");
 textureHolder.load(Textures::Bars, "bars.png");
+textureHolderMenu.load(Textures::StatForm, "ClearForm.png");
 
 fontHolder.load(Fonts::MainFontGame, "MainFont.ttf");
 
 textureHolderMenu.load(Textures::Button, "ButtonNormal.png");
 textureHolderMenu.load(Textures::ButtonPressed, "ButtonPressed.png");
 textureHolderMenu.load(Textures::LoginForm, "LoginForm.png");
-textureHolderMenu.load(Textures::ChooseForm, "CharsForm2.png");
+textureHolderMenu.load(Textures::ChooseForm, "CharsForm.png");
+textureHolderMenu.load(Textures::CreateCharForm, "CharsForm.png");
 textureHolderMenu.load(Textures::RegisterForm, "RegisterForm.png");
 textureHolderMenu.load(Textures::MenuBackground, "MenuBackground.png");
 textureHolderMenu.load(Textures::LoginButton, "LoginButtonNormal.png");

@@ -23,7 +23,6 @@ private:
         target.draw(nicknameToDraw);
         if(gameState != States::Menu)
         target.setView(playerView);
-
     }
 
 };

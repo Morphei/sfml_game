@@ -4,6 +4,7 @@
 Player::Player()
 {
         playerView.reset(sf::FloatRect(0,0,1366,768));
+        classType = ObjectType::Player;
 }
 
 void Player::setSpeed(int spd)

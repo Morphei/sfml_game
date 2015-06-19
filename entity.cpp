@@ -2,11 +2,18 @@
 
 Entity::Entity()
 {
+    classType = ObjectType::Entity;
 }
 
 EntityState::stateOfObject Entity::getState()
 {
     return mAnimation.getState();
+}
+
+void Entity::stop()
+{
+    setState(EntityState::Normal, dir);
+//    move(sf::Vector2f(targetCoordinates.x * -1, targetCoordinates.y * -1));
 }
 
 void Entity::attack(sf::Vector2f target)
@@ -33,25 +40,26 @@ void Entity::update(sf::Time deltaTime)
 {
     if(state == EntityState::stateOfObject::Run)
             {
-            distanceToTarget = sqrt( ( (targetCoordinates.x - mPosition.x)*(targetCoordinates.x - mPosition.x) ) +
-                                 ( (targetCoordinates.y - mPosition.y)*(targetCoordinates.y - mPosition.y) ) );
+                distanceToTarget = sqrt( ( (targetCoordinates.x - mPosition.x)*(targetCoordinates.x - mPosition.x) ) +
+                                     ( (targetCoordinates.y - mPosition.y)*(targetCoordinates.y - mPosition.y) ) );
 
-                if(distanceToTarget > 5)
-                    {
+                    if(distanceToTarget > 5)
+                        {
 
-                    mPosition.x += ((targetCoordinates.x - mPosition.x)/distanceToTarget) * mSpeed * deltaTime.asSeconds();
-                    mPosition.y += ((targetCoordinates.y - mPosition.y)/distanceToTarget) * mSpeed * deltaTime.asSeconds();
+                        mPosition.x += ((targetCoordinates.x - mPosition.x)/distanceToTarget) * mSpeed * deltaTime.asSeconds();
+                        mPosition.y += ((targetCoordinates.y - mPosition.y)/distanceToTarget) * mSpeed * deltaTime.asSeconds();
 
-                    nicknameToDraw.setPosition(mPosition.x, mPosition.y - mAnimation.getSprite()->getGlobalBounds().height * 1.1);
+                        nicknameToDraw.setPosition(mPosition.x, mPosition.y - mAnimation.getSprite()->getGlobalBounds().height * 1.1);
 
-                    mAnimation.setPosition(mPosition);
-                    mAnimation.update(deltaTime);
-                    }
+                        mAnimation.setPosition(mPosition);
+                        mAnimation.update(deltaTime);
+                        }
 
-                else
-                    {
-                        setState(EntityState::Normal, dir);
-                    }
+                    else
+                        {
+                            setState(EntityState::Normal, dir);
+                        }
+
 
 
             }
@@ -85,6 +93,7 @@ std::string Entity::getName()
 void Entity::setPosition(sf::Vector2f pos)
 {
     mPosition = pos;
+    nicknameToDraw.setPosition(mPosition.x, mPosition.y - mAnimation.getSprite()->getGlobalBounds().height * 1.1);
     mAnimation.setPosition(pos);
 }
 
@@ -132,6 +141,11 @@ bool Entity::checkClick(sf::Vector2f pos)
     if(mAnimation.getSprite()->getGlobalBounds().contains(pos))
         return true;
     else return false;
+}
+
+bool Entity::isStopped()
+{
+    return stoppedFlag;
 }
 
 void Entity::setTexture(Textures::ID_InGame id, sf::Vector2i sizeNorm, sf::Vector2i sizeAttack, sf::Vector2i sizeRun)

@@ -20,6 +20,8 @@ public:
 
     EntityState::stateOfObject getState();
 
+    virtual void stop();
+
     virtual void attack(sf::Vector2f target);
 
     virtual void update(sf::Time deltaTime);
@@ -62,8 +64,12 @@ public:
 
     virtual bool checkClick(sf::Vector2f pos);
 
+    virtual bool isStopped();
+
 
 protected:
+
+    bool stoppedFlag = false;
 
     std::string nickname;
 
@@ -91,7 +97,7 @@ protected:
 
     EntityState::typeOfEntity type;
 
-    EntityState::direction dir;
+    EntityState::direction dir, noWay;
 
     EntityState::statsOfEntity stats;
 

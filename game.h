@@ -5,6 +5,7 @@
 #include "world.h"
 #include "gamestates.h"
 #include "resourcemanager.h"
+#include "formmanager.h"
 //#include "networkoperator.h"
 
 #include "messagesender.h"

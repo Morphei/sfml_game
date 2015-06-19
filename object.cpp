@@ -2,12 +2,17 @@
 
 Object::Object()
 {
-
+    classType = ObjectType::Object;
 }
 
 sf::Sprite *Object::getSprite()
 {
     return &sprite;
+}
+
+ObjectType::ID Object::getClassName()
+{
+    return classType;
 }
 
 int Object::getID() const

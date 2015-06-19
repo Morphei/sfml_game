@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "resourcemanager.h"
+#include "gamestates.h"
 
 class Object : sf::Drawable
 {
@@ -12,6 +13,8 @@ public:
     friend class EntityManager;
 
     virtual sf::Sprite* getSprite();
+
+    virtual ObjectType::ID getClassName();
 
     virtual int getID() const;
     virtual void setID(int ID);
@@ -30,6 +33,9 @@ public:
 
 
 protected:
+
+    ObjectType::ID classType;
+
     sf::Vector2f position;
     int objectID;
 

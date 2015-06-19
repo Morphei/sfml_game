@@ -45,6 +45,8 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
             form->addTextBox(Forms::textBoxID::PasswordTextBox, sf::Vector2f(20, 210), Fonts::MainFontMenu, true);
 
             form->isCreated();
+
+            ready = true;
         }
         break;
 
@@ -73,7 +75,7 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
 
     case Forms::CreateNewChar:
         {
-            form->createForm(Forms::ID::CreateNewChar, Textures::ChooseForm, position);
+            form->createForm(Forms::ID::CreateNewChar, Textures::CreateCharForm, position);
 
             form->addButton(Forms::buttonID::CreateNew, "Create Char", sf::Vector2f(250, 200), Textures::Button, Textures::ButtonPressed);
             form->addTextBox(Forms::textBoxID::LoginTextBox, sf::Vector2f(40, 200), Fonts::MainFontMenu, false);
@@ -87,6 +89,17 @@ void FormManager::createForm(Forms::ID id, sf::Vector2f position)
 
             form->isCreated();
 
+            ready = true;
+        }
+        break;
+
+    case Forms::StatsForm:
+        {
+//            form->createForm(Forms::ID::StatsForm, Textures::StatForm, position);
+
+//            form->addLabel(sf::Vector2f(40, 50), "Hit Points: ", Fonts::MainFontGame);
+
+//            form->addLabel(sf::Vector2f(40, 150), "Mana Points: ", Fonts::MainFontGame);
             ready = true;
         }
         break;
@@ -148,9 +161,7 @@ void FormManager::checkClick(sf::Vector2f mousePos)
                 case Forms::buttonID::Delete_char:
                 {
                     std::string nickname = form->manager.getSelectedEnemy();
-                    EntityState::typeOfEntity type = form->manager.getSelectedEnemyType();
-
-                    sender.sendCharToDelete(nickname, type);
+                    sender.sendCharToDelete(nickname);
                 }
                     break;
 
